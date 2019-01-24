@@ -7,17 +7,18 @@ Dictionary mapping name to a dictionary of profile information
 """
 profiles = {}
 
-"""
-Pretty prints a dictionary
-"""
-def prettyprint(dictionary):
+
+def pretty_print(dictionary):
+    """
+    Pretty prints a dictionary
+    """
     print json.dumps(dictionary, sort_keys=False, indent=4)
 
 
-"""
-Takes in a file, parses the different fields and updates the profiles dictionary
-"""
 def parse(doc):
+    """
+    Takes in an opened file, parses the different fields and updates the profiles dictionary
+    """
     lines = [i.strip() for i in doc.readlines()]
     name = lines[0][len("Name:"):].strip()
     gender = lines[1][len("Gender:"):].strip()
@@ -55,6 +56,6 @@ if __name__ == "__main__":
             parse(f)
             f.close()
 
-    prettyprint(profiles)
+    pretty_print(profiles)
 
 
