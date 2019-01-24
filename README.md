@@ -13,6 +13,7 @@ To be able to run this all you need is your Python IDE.
 ## Authors
 
 * **Shikiko** 
+* **rizemon**
 
 update accordingly pls.
 
