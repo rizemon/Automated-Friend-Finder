@@ -1,0 +1,19 @@
+Name: Jenny Wang 
+Gender: F
+Country: China
+Acceptable_country: China, USA,Singapore
+Age: 25
+Acceptable_age_range: 23-60
+Likes: hotpot, chicken and chops, chilli, roses, movies
+Dislikes: durain, garlic, swimming 
+
+Books:
+Mere Christianity 
+Knowing God
+How should we then live? the rise and decline of western thought and culture
+The problem of Pain 
+The God who is there 
+The reason for God: belief in an age of skepticism 
+Experiencing God: knowing and doing the will of God, work book
+
+  

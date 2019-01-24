@@ -1,0 +1,18 @@
+Name: Carol 
+Gender: F
+Country: USA
+Acceptable_country: Singapore, China
+Age: 23
+Acceptable_age_range: 23-50
+Likes: Chicken rice,hotpot, Carrot cake, chilli crab, roses, movies
+Dislikes: football, hunting, swimming 
+
+Books:
+Christian reflections
+The red tent 
+The God who is there
+God in the Dock: Essays on Theology and Ethics
+Total truth: liberating christianity from its cultural captivity 
+Redeeming love
+
+  

@@ -1,0 +1,20 @@
+Name: Joel Jackson 
+Gender: Male
+Country: Singapore
+Acceptable_country: Singapore, China, USA
+Age: 29
+Acceptable_age_range: 18-33
+Likes: hotpot, chicken and chops, chilli, roses, movies
+Dislikes: durain, garlic, swimming 
+
+Books:
+Human Philosohy
+Nicomachean Ethics 
+Summa Theologiae
+Meditations on First Philosophy 
+Essay Concerning Human Understanding 
+Principles of Human Knowledge 
+Enquiry Concerning Human Understanding 
+Social Contract 
+Phenomenology of Spirit
+

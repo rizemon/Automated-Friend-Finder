@@ -1,0 +1,16 @@
+Name: Lisa Marie 
+Gender: F
+Country: Singapore
+Acceptable_country: Singapore, China
+Age: 22
+Acceptable_age_range: 18-30
+Likes: hotpot, chilli, chicken and chops, roses, movies
+Dislikes: garlic, durain, swimming 
+
+Books:
+Desiring God Meditations of a Christian Hedonist  
+God Knowing
+God Favor: Breath of Heaven 
+The God is there 
+The reason for God: in an age of skepticism 
+Experiencing God: knowing the will of God, work book

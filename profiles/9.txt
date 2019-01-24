@@ -1,0 +1,16 @@
+Name: Angela Little 
+Gender: F
+Country: Singapore
+Acceptable_country: Singapore, China
+Age: 22
+Acceptable_age_range: 18-30
+Likes: garlic, durain, swimming, chicken and chops, 
+Dislikes:  hotpot, chilli, roses, movies
+
+Books:
+Christian reflections
+The red tent 
+The God who is there
+God in the Dock: Essays on Theology and Ethics
+Total truth: liberating christianity from its cultural captivity 
+Redeeming love

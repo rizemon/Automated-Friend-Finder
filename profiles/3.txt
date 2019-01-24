@@ -1,0 +1,17 @@
+Name: Kevin 
+Gender: Male
+Country: Singapore
+Acceptable_country: Singapore
+Age: 25
+Acceptable_age_range: 10-33
+Likes: fish,chiken, chocolate, roses, durain, movies
+Dislikes: curry,garlic,basketball
+
+Books:
+Human Philosohy
+Adventures in Human Being 
+Meditations on the Philosophy 
+Essay Concerning Human topic 
+Principles of Human being
+
+

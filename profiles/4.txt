@@ -1,0 +1,17 @@
+Name: Rose
+Gender: F
+Country: Singapore
+Acceptable_country: Singapore, China, UK
+Age: 25
+Acceptable_age_range: 18-35
+Likes: fish, honey, chocolate, roses, durain, running
+Dislikes:chilli,garlic,basketball
+
+Books:
+Human Philosohy book
+Adventures in Human Being 
+Towards the Philosophy 
+Essay Related Human Topics 
+Human Being Shall Know Philosohy
+
+

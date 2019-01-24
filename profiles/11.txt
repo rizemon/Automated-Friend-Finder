@@ -1,0 +1,15 @@
+Name: Teresa 
+Gender: F
+Country: Singapore
+Acceptable_country: Singapore, China
+Age: 22
+Acceptable_age_range: 18-30
+Likes: hotpot, chilli, chicken and chops, roses, movies
+Dislikes: garlic, durain, swimming 
+
+Books:
+Total Truth: Liberating Christianity from its Cultural Captivity
+Reflections on the Psalms
+Intercessory Prayer: How God Can Use Your Prayers to Move Heaven Earth 
+God 's Favor - Breath Of Heaven 
+Letters to Malcolm: Chiefly on Prayer 
