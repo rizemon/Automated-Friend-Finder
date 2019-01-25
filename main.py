@@ -47,14 +47,3 @@ def parse(doc):
         "dislikes": dislikes,
         "books": books
     }
-
-
-if __name__ == "__main__":
-    directory = ".\\profiles"
-    files = os.listdir(directory)
-    for filename in files:
-        with open(os.path.join(directory, files[0]), "r") as f:
-            parse(f)
-            f.close()
-
-    pretty_print(profiles)

@@ -1,6 +1,7 @@
 import sys
 import os
 import glob
+import main
 
 
 def restart_program():
@@ -33,12 +34,15 @@ if(pathSelected == "false"):
     restart_program()
 else:
     print("Path file detected, attempting to open now. Please wait for awhile")
-    if(os.path.isdir(pathSelected)):
-        files = glob.glob(pathSelected + '\\*')
-        for name in files:
-            try:
-                with open(name) as f:
-                    file = open(name, 'r')
-                    print(file.read())
-            except Exception as e:
-                print(e)
+    try:
+        if(os.path.isdir(pathSelected)):
+            files = glob.glob(pathSelected + '\\*')
+            for name in files:
+                try:
+                    with open(name) as f:
+                        main.parse(f)
+                except Exception as e:
+                    print(e)
+            main.pretty_print(main.profiles)
+    except Exception as e:
+        print(e)
