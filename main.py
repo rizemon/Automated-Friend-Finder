@@ -2,23 +2,22 @@ import os
 import json
 
 
-"""
-Dictionary mapping name to a dictionary of profile information
-"""
+# Dictionary mapping name to a dictionary of profile information
+
 profiles = {}
 
 
 def pretty_print(dictionary):
-    """
-    Pretty prints a dictionary
-    """
+
+    # Pretty prints a dictionary
+
     print json.dumps(dictionary, sort_keys=False, indent=4)
 
 
 def parse(doc):
-    """
-    Takes in an opened file, parses the different fields and updates the profiles dictionary
-    """
+
+    # Takes in an opened file, parses the different fields and updates the
+    # profiles dictionary
     lines = [i.strip() for i in doc.readlines()]
     name = lines[0][len("Name:"):].strip()
     gender = lines[1][len("Gender:"):].strip()
@@ -34,7 +33,7 @@ def parse(doc):
         len("Acceptable_age_range:"):].strip().split('-')
     likes = [i.strip()
              for i in lines[6][len("Likes:"):].strip().split(',') if i != ""]
-    dislikes = [i.strip() for i in lines[7][len("Dislikes:")                                            :].strip().split(',') if i != ""]
+    dislikes = [i.strip() for i in lines[7][len("Dislikes:"):].strip().split(',') if i != ""]
     books = [i.strip() for i in lines[10:] if i != ""]
     profiles[name] = {
         "gender": gender[0],
