@@ -27,11 +27,14 @@ def parse(doc):
     else:
         gender = "F"
     country = lines[2][len("Country:"):].strip()
-    acceptable_country = [i.strip() for i in lines[3][len("Acceptable_country:"):].strip().split(',')]
+    acceptable_country = [i.strip() for i in lines[3][len(
+        "Acceptable_country:"):].strip().split(',')]
     age = lines[4][len("Age:"):].strip()
-    acceptable_age_range = lines[5][len("Acceptable_age_range:"):].strip().split('-')
-    likes = [i.strip() for i in lines[6][len("Likes:"):].strip().split(',') if i != ""]
-    dislikes = [i.strip() for i in lines[7][len("Dislikes:"):].strip().split(',') if i != ""]
+    acceptable_age_range = lines[5][
+        len("Acceptable_age_range:"):].strip().split('-')
+    likes = [i.strip()
+             for i in lines[6][len("Likes:"):].strip().split(',') if i != ""]
+    dislikes = [i.strip() for i in lines[7][len("Dislikes:")                                            :].strip().split(',') if i != ""]
     books = [i.strip() for i in lines[10:] if i != ""]
     profiles[name] = {
         "gender": gender[0],
@@ -52,10 +55,8 @@ if __name__ == "__main__":
     directory = ".\\profiles"
     files = os.listdir(directory)
     for filename in files:
-        with open(os.path.join(directory,files[0]),"r") as f:
+        with open(os.path.join(directory, files[0]), "r") as f:
             parse(f)
             f.close()
 
     pretty_print(profiles)
-
-
