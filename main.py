@@ -3,7 +3,6 @@ import json
 
 
 # Dictionary mapping name to a dictionary of profile information
-
 profiles = {}
 
 
