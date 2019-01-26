@@ -47,3 +47,4 @@ def parse(doc):
         "dislikes": dislikes,
         "books": books
     }
+    pretty_print(profiles)
