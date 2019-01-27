@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1ad47f76-5b1c-48e1-a002-9324368a76a9}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>main.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="path.txt" />
+    <Content Include="profiles\1.txt" />
+    <Content Include="profiles\10.txt" />
+    <Content Include="profiles\11.txt" />
+    <Content Include="profiles\2.txt" />
+    <Content Include="profiles\3.txt" />
+    <Content Include="profiles\4.txt" />
+    <Content Include="profiles\5.txt" />
+    <Content Include="profiles\7.txt" />
+    <Content Include="profiles\8.txt" />
+    <Content Include="profiles\9.txt" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="fileparser.py" />
+    <Compile Include="getfilepath.py" />
+    <Compile Include="jiale.py" />
+    <Compile Include="kijoon.py" />
+    <Compile Include="main.py" />
+    <Compile Include="metrics.py" />
+    <Compile Include="ronghao.py" />
+    <Compile Include="text.py" />
+    <Compile Include="viewIndividual.py" />
+    <Compile Include="william.py" />
+    <Compile Include="yongjie.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="profiles" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

@@ -1,12 +1,17 @@
 #Function: viewIndividual
 #is to translate input from "profile name (Michael Jackson)" to "filename (1)"
 import getfilepath
+import sys
 import fileparser
 import ronghao
+import metrics
 
 
 def viewIndividual(profiles):
     global filename1
+    global gender
+    data=[]
+    gender = None
     directory = getfilepath.getFilePath()
     
  
@@ -35,7 +40,16 @@ def viewIndividual(profiles):
         ronghao.top3profiles()
 
     f = open(filename1, "r")
-    print ("\n\n\n" + f.read())
-    f.close()
+    #print ("\n\n\n" + f.read())
+
+
+    for line in f:
+        lines=line.split(' ')
+        data.append(lines)
+    
+    gender = data[1][1][0]
+    print gender
+    
+    metrics.calculator(gender)
     
     return
