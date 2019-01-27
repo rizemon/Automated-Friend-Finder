@@ -33,7 +33,7 @@ if __name__ == "__main__":
     jiale.viewMatchesBooks(profiles)
 
     # Function 5
-    ronghao.viewMatchesOverall(profiles)
+    ronghao.top3profiles()
 
     # Function 6
     william.storeCSV()
