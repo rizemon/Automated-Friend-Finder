@@ -14,6 +14,7 @@ To be able to run this all you need is your Python IDE.
 
 * **Shikiko** 
 * **rizemon**
+* **qazpl9**
 
 update accordingly pls.
 

@@ -1,49 +1,51 @@
-import os
-import json
+from fileparser import pretty_print
+import getfilepath
+from os.path import isdir
+from sys import exit
+
+import yongjie
+import ronghao
+import kijoon
+import jiale
+import william
+
+if __name__ == "__main__":
+    # Get directory of profiles
+    directory = getfilepath.getFilePath()
+
+    # If directory does not exist, exit the program
+    if not isdir(directory):
+        print "Invalid directory!"
+        exit(0)
+    print "Reading profiles from %s now..." % directory
+
+    # Read the profiles and store in profiles dictionary
+    profiles = getfilepath.getProfiles(directory)
+    # For debugging purposes
+    pretty_print(profiles)
+
+    # Function 1,2,3 (Based on Project 1 Description.pdf)
+    yongjie.viewProfiles(profiles)
+    yongjie.viewMatchesCountry(profiles)
+    yongjie.viewMatchesLikesDislikes(profiles)
+
+    # Function 4
+    jiale.viewMatchesBooks(profiles)
+
+    # Function 5
+    ronghao.viewMatchesOverall(profiles)
+
+    # Function 6
+    william.storeCSV()
+
+    # Open function
+    kijoon.openFunction(profiles)
 
 
-# Dictionary mapping name to a dictionary of profile information
-profiles = {}
 
 
-def pretty_print(dictionary):
-
-    # Pretty prints a dictionary
-
-    print json.dumps(dictionary, sort_keys=False, indent=4)
 
 
-def parse(doc):
 
-    # Takes in an opened file, parses the different fields and updates the
-    # profiles dictionary
-    lines = [i.strip() for i in doc.readlines()]
-    name = lines[0][len("Name:"):].strip()
-    gender = lines[1][len("Gender:"):].strip()
-    if gender in ["Male", "M"]:
-        gender = "M"
-    else:
-        gender = "F"
-    country = lines[2][len("Country:"):].strip()
-    acceptable_country = [i.strip() for i in lines[3][len(
-        "Acceptable_country:"):].strip().split(',')]
-    age = lines[4][len("Age:"):].strip()
-    acceptable_age_range = lines[5][
-        len("Acceptable_age_range:"):].strip().split('-')
-    likes = [i.strip()
-             for i in lines[6][len("Likes:"):].strip().split(',') if i != ""]
-    dislikes = [i.strip() for i in lines[7][len("Dislikes:"):].strip().split(',') if i != ""]
-    books = [i.strip() for i in lines[10:] if i != ""]
-    profiles[name] = {
-        "gender": gender[0],
-        "country": country,
-        "acceptable_country": acceptable_country,
-        "age": int(age),
-        "acceptable_age_range": {
-            "start": int(acceptable_age_range[0]),
-            "end": int(acceptable_age_range[1]) + 1,
-        },
-        "likes": likes,
-        "dislikes": dislikes,
-        "books": books
-    }
+
+

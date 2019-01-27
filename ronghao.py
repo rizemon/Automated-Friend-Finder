@@ -11,6 +11,7 @@ def viewMatchesOverall(profiles):
     # profiles information which may include all the personal information for
     # ranking. Note that you can define our own ranking metric. However, the
     # ranking metric must be reasonable
+    global filename
     viewIndividual(profiles)
     f = open(filename, "r")
     print (f.read())
