@@ -10,7 +10,7 @@ import fileparser
 def top3profiles():
     profiles=str(raw_input("Enter name of the person you wish to view: "))
     viewIndividual.viewIndividual(profiles)
-    
+
     return
 
     # Function 5: List the top 3 best matched students based on the overall
