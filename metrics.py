@@ -15,7 +15,7 @@ def calculator(gender):
     else:
         compatibility = compatibility - 50
 
-    print compatibility
+    print ("compatibility: " + str(compatibility))
     return compatibility
 
 

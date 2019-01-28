@@ -42,13 +42,14 @@ def viewIndividual(profiles):
     f = open(filename1, "r")
     #print ("\n\n\n" + f.read())
 
-
+    #storing profiles in list
     for line in f:
         lines=line.split(' ')
         data.append(lines)
-    
+
+    #obtaining gender information from list
     gender = data[1][1][0]
-    print gender
+    print ("Gender: " + gender)
     
     metrics.calculator(gender)
     
