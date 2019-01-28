@@ -4,8 +4,13 @@ Python project for ICT1002
 
 ### Prerequisites
 
-To be able to run this all you need is your Python IDE.
+1) Install the necessary Python 2 packages: ```pip install -r requirements.txt```
 
+### How to run
+
+``` 
+python main.py
+```
 ## Built With
 
 * Python IDE LOL
