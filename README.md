@@ -4,10 +4,15 @@ Python project for ICT1002
 
 ### Prerequisites
 
-1) Install the necessary Python 2 packages: ```pip install -r requirements.txt```
+1. Install the necessary Python 2 packages: ```pip install -r requirements.txt```
 
 ### How to run
 
+1.  Change current working directory to the root directory of this project
+```
+cd "Automated Friend Finder"
+```
+2.  Run main.py
 ``` 
 python main.py
 ```
