@@ -4,7 +4,10 @@ Python project for ICT1002
 
 ### Prerequisites
 
-1. Install the necessary Python 2 packages: ```pip install -r requirements.txt```
+1. Install the necessary Python 2 packages
+```
+pip install -r requirements.txt
+```
 
 ### How to run
 
