@@ -40,12 +40,3 @@ if __name__ == "__main__":
 
     # Open function
     kijoon.openFunction(profiles)
-
-
-
-
-
-
-
-
-
