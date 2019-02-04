@@ -8,6 +8,7 @@ import ronghao
 import kijoon
 import jiale
 import william
+import piechart
 
 if __name__ == "__main__":
     # Get directory of profiles

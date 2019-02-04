@@ -4,7 +4,8 @@ Python project for ICT1002
 
 ### Prerequisites
 
-To be able to run this all you need is your Python IDE.
+* To be able to run this all you need is your Python IDE.
+* pytonmatlib is needed
 
 ## Built With
 
