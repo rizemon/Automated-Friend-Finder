@@ -131,5 +131,5 @@ The top three matches in are:
 
 Third:  %s
 Second: %s
-First:  %s''' %(first,second,third)
+First:  %s''' %(third,second,first)
     
