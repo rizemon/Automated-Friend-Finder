@@ -44,7 +44,7 @@ Enter input: ''')
             jiale.viewMatchesBooks(profiles)
         elif menu == '5':
             # Function 5
-            ronghao.top3profiles()
+            ronghao.top3()
         elif menu == '6':
             # Function 6
             william.storeCSV()
