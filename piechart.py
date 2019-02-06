@@ -1,5 +1,6 @@
 import collections
 import matplotlib.pyplot as plt
+from io import BytesIO
 
 
 #  Gets all users' likes  and represents it in a pie chart
@@ -17,7 +18,15 @@ def display_data_likes(profiles):
 
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
-    return plt
+
+    # Save pie chart in png format
+    figure = BytesIO()
+    plt.savefig(figure, format="png", bbox_inches="tight")
+    figure.seek(0)
+    # Clear pie chart
+    plt.clf()
+    # Return pie chart bytes
+    return figure
 
 
 #  Gets all users' dislikes  and represents it in a pie chart
@@ -36,7 +45,14 @@ def display_data_dislikes(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    return plt
+    # Save pie chart in png format
+    figure = BytesIO()
+    plt.savefig(figure, format="png", bbox_inches="tight")
+    figure.seek(0)
+    # Clear pie chart
+    plt.clf()
+    # Return pie chart bytes
+    return figure
 
 
 #  Gets all users' nationality and represents it in a pie chart
@@ -54,7 +70,14 @@ def display_data_nationality(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    return plt
+    # Save pie chart in png format
+    figure = BytesIO()
+    plt.savefig(figure, format="png", bbox_inches="tight")
+    figure.seek(0)
+    # Clear pie chart
+    plt.clf()
+    # Return pie chart bytes
+    return figure
 
 
 #  Gets all users' age and represents it in a pie chart
@@ -72,4 +95,11 @@ def display_data_age(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    return plt
+    # Save pie chart in png format
+    figure = BytesIO()
+    plt.savefig(figure, format="png", bbox_inches="tight")
+    figure.seek(0)
+    # Clear pie chart
+    plt.clf()
+    # Return pie chart bytes
+    return figure
