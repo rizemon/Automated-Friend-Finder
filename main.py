@@ -4,7 +4,7 @@ import piechart
 
 from os.path import isdir
 from sys import exit
-from flask import Flask, jsonify, Response, request, abort
+from flask import Flask, jsonify, Response, request, abort, send_from_directory
 from flask_cors import CORS
 
 import yongjie
@@ -21,6 +21,16 @@ CORS(app)
 # profiles dictionary to be accessed by all functions
 profiles = {}
 piecharts = {}
+
+@app.route('/')
+def index():
+    return send_from_directory('static', "index.html")
+
+
+@app.route('/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
+
 
 @app.route('/all')
 def viewAll():
