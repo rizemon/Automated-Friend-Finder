@@ -6,7 +6,6 @@ from os.path import isdir
 from sys import exit
 from flask import Flask, jsonify, Response, request, abort
 from flask_cors import CORS
-from io import BytesIO
 
 import yongjie
 import ronghao
@@ -21,6 +20,7 @@ CORS(app)
 
 # profiles dictionary to be accessed by all functions
 profiles = {}
+piecharts = {}
 
 @app.route('/all')
 def viewAll():
@@ -67,30 +67,13 @@ def plotPiechart(field):
 
     # Return a PNG of the plotted pie chart based on field
 
-    plt = None
-    if field == "likes":
-        # Plot based on likes
-        plt = piechart.display_data_likes(profiles)
-    elif field == "dislikes":
-        # Plot based on dislikes
-        plt = piechart.display_data_dislikes(profiles)
-    elif field == "age":
-        # Plot based on age
-        plt = piechart.display_data_age(profiles)
-    elif field == "country":
-        # Plot based country
-        plt = piechart.display_data_nationality(profiles)
-    else:
+    # If unsupported field, return NOT FOUND
+    if field not in piecharts:
         abort(404)
         return
 
-    # Save pie chart in png format
-    figure = BytesIO()
-    plt.savefig(figure, format="png", bbox_inches="tight")
-    plt.clf()
-    figure.seek(0)
-
     # Output as png file
+    figure = piecharts[field]
     return Response(figure.getvalue(), mimetype='image/png')
 
 
@@ -123,10 +106,16 @@ if __name__ == "__main__":
     # Function 6
     william.storeCSV()
 
+    # Pre-compute all pie charts
+    piecharts["likes"] = piechart.display_data_likes(profiles)
+    piecharts["dislikes"] = piechart.display_data_dislikes(profiles)
+    piecharts["age"] = piechart.display_data_age(profiles)
+    piecharts["country"] = piechart.display_data_nationality(profiles)
+
     # Open function
     kijoon.openFunction(profiles)
 
     # Start Flask application on port 80 for loopback interface
-    app.run("127.0.0.1", 80, False)
+    app.run(host="127.0.0.1", port=80, threaded=True)
 
 
