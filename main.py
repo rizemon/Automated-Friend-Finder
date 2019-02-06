@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # Open function
     kijoon.openFunction(profiles)
 
-    # Start Flask application on port 80 for all interfaces
-    app.run("0.0.0.0", 80, False)
+    # Start Flask application on port 80 for loopback interface
+    app.run("127.0.0.1", 80, False)
 
 
