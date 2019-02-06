@@ -109,8 +109,8 @@ if __name__ == "__main__":
     # Pre-compute all pie charts
     piecharts["likes"] = piechart.display_data_likes(profiles)
     piecharts["dislikes"] = piechart.display_data_dislikes(profiles)
-    piecharts["age"] = piechart.display_data_age(profiles)
     piecharts["country"] = piechart.display_data_nationality(profiles)
+    piecharts["age"] = piechart.display_data_age(profiles)
 
     # Open function
     kijoon.openFunction(profiles)
