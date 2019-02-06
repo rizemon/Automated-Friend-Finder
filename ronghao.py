@@ -3,7 +3,7 @@ from os.path import isdir
 from fileparser import pretty_print
 
 
-def top3():
+def viewMatchesOverall():
     query = raw_input("Write the name of the person you want to know for the top 3 matches: ")
     print overallCompatibility(query)
 
