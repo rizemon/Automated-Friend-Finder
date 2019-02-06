@@ -87,6 +87,7 @@ def plotPiechart(field):
     # Save pie chart in png format
     figure = BytesIO()
     plt.savefig(figure, format="png", bbox_inches="tight")
+    plt.clf()
     figure.seek(0)
 
     # Output as png file
