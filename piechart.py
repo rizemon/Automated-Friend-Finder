@@ -17,8 +17,7 @@ def display_data_likes(profiles):
 
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
-
-    plt.show()
+    return plt
 
 
 #  Gets all users' dislikes  and represents it in a pie chart
@@ -37,7 +36,7 @@ def display_data_dislikes(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    plt.show()
+    return plt
 
 
 #  Gets all users' nationality and represents it in a pie chart
@@ -55,7 +54,7 @@ def display_data_nationality(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    plt.show()
+    return plt
 
 
 #  Gets all users' age and represents it in a pie chart
@@ -73,4 +72,4 @@ def display_data_age(profiles):
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
-    plt.show()
+    return plt
