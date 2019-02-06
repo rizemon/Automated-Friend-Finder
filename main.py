@@ -22,6 +22,15 @@ CORS(app)
 # profiles dictionary to be accessed by all functions
 profiles = {}
 
+@app.route('/all')
+def viewAll():
+
+    # Return a JSON of an array of all profiles
+
+    resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+
+    # Output as JSON
+    return jsonify(resp)
 
 @app.route('/bestmatch/<string:field>')
 def viewBestMatch(field):
