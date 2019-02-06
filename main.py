@@ -2,7 +2,6 @@ from fileparser import pretty_print
 import getfilepath
 from os.path import isdir
 from sys import exit
-import metrics
 
 import yongjie
 import ronghao
