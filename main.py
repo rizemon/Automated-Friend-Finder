@@ -9,6 +9,7 @@ import kijoon
 import jiale
 import william
 import piechart
+import matchexport
 
 if __name__ == "__main__":
     # Get directory of profiles
