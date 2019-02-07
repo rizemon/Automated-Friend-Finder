@@ -7,15 +7,18 @@ from io import BytesIO
 def display_data_likes(profiles):
     user_like_keys = []
     likes = []
+    # Stores dictionary keys into user_likes_keys
     for i in profiles.keys():
         user_like_keys.append(i)
+    # Stores the values into profile_like temporarily and appends values to a dictionary
     for i in user_like_keys:
-        profilelike = profiles[i]['likes']
-        for x in profilelike:
+        profile_like = profiles[i]['likes']
+        for x in profile_like:
             likes.append(x)
+    # Gets top 5 most common factors
     counter = collections.Counter(likes)
     common = dict(counter.most_common(5))
-
+    # Instantiates pie chart with top 5 common factors as its elements and its keys as labels
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
@@ -32,16 +35,20 @@ def display_data_likes(profiles):
 #  Gets all users' dislikes  and represents it in a pie chart
 def display_data_dislikes(profiles):
     user_dislikes_keys = []
-    likes = []
+    dislikes = []
+    # Stores dictionary keys into user_dislikes_keys
     for i in profiles.keys():
         user_dislikes_keys.append(i)
+    # Stores the values into profile_dislikes temporarily and appends values to a dictionary
     for i in user_dislikes_keys:
         profile_dislikes = profiles[i]['dislikes']
         for x in profile_dislikes:
-            likes.append(x)
-    counter = collections.Counter(likes)
+            dislikes.append(x)
+    # Gets top 5 most common factors
+    counter = collections.Counter(dislikes)
     common = dict(counter.most_common(5))
 
+    # Instantiates pie chart with top 5 common factors as its elements and its keys as labels
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
@@ -58,15 +65,19 @@ def display_data_dislikes(profiles):
 #  Gets all users' nationality and represents it in a pie chart
 def display_data_nationality(profiles):
     user_nationality_keys = []
-    likes = []
+    nationalities = []
+    # Stores dictionary keys into user_nationality_keys
     for i in profiles.keys():
         user_nationality_keys.append(i)
+    # Stores the values into nationalities
     for i in user_nationality_keys:
-        likes.append(profiles[i]['country'])
+        nationalities.append(profiles[i]['country'])
 
-    counter = collections.Counter(likes)
+    # Gets top 5 most common factors
+    counter = collections.Counter(nationalities)
     common = dict(counter.most_common(5))
 
+    # Instantiates pie chart with top 5 common factors as its elements and its keys as labels
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
@@ -83,15 +94,19 @@ def display_data_nationality(profiles):
 #  Gets all users' age and represents it in a pie chart
 def display_data_age(profiles):
     user_age_keys = []
-    likes = []
+    _user_ages = []
+    # Stores dictionary keys into user_age_keys
     for i in profiles.keys():
         user_age_keys.append(i)
+    # Stores the values into _user_ages
     for i in user_age_keys:
-        likes.append(profiles[i]['age'])
+        _user_ages.append(profiles[i]['age'])
 
-    counter = collections.Counter(likes)
+    # Gets top 5 most common factors
+    counter = collections.Counter(_user_ages)
     common = dict(counter.most_common(5))
-
+    
+    # Instantiates pie chart with top 5 common factors as its elements and its keys as labels
     plt.pie([str(v) for v in common.values()], labels=[str(k) for k in common],
             autopct='%1.1f%%', startangle=90)
 
