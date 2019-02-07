@@ -11,7 +11,7 @@ import william
 
 if __name__ == "__main__":
     # Get directory of profiles
-    directory = getfilepath.getFilePath()
+    directory = getfilepath.get_file_path()
 
     # If directory does not exist, exit the program
     if not isdir(directory):
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print "Reading profiles from %s now..." % directory
 
     # Read the profiles and store in profiles dictionary
-    profiles = getfilepath.getProfiles(directory)
+    profiles = getfilepath.get_profiles(directory)
     # For debugging purposes
     pretty_print(profiles)
 
