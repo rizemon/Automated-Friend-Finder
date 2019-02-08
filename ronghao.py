@@ -31,12 +31,14 @@ def countryCompatibility(PersonInputed2):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != PersonInputed2:
 
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[PersonInputed2]['gender']:
             #Compare everyone country with the person input by the user acceptable country
-            for acc_country in profiles[name]['acceptable_country']:
+                for acc_country in profiles[name]['acceptable_country']:
 
                 #if their country is also the person acceptable country, add 25 points to that individual
-                if (profiles[name]["country"] ==  acc_country) :
-                    Country_compat_dict[name] = 25
+                    if (profiles[name]["country"] ==  acc_country) :
+                        Country_compat_dict[name] = 25
             
     return Country_compat_dict
 
@@ -59,12 +61,15 @@ def ageCompatibility(inputName):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != inputName:
 
-            #Compare everyone's age with the person's acceptable age range
-            for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[inputName]['gender']:
+                
+                #Compare everyone's age with the person's acceptable age range
+                for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
 
-                #if their age is in the person acceptable age range, add 25 points to that individual
-                if (profiles[inputName]["age"] ==  acc_Age_Range) :
-                    Age_comp_dict[name] = 25
+                    #if their age is in the person acceptable age range, add 25 points to that individual
+                    if (profiles[inputName]["age"] ==  acc_Age_Range) :
+                        Age_comp_dict[name] = 25
 
     return Age_comp_dict
 
@@ -85,13 +90,16 @@ def likesCompatibility(nameOfInput2):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != str(nameOfInput2):
 
-            #For each likes in other people in the profile list, compare them to each likes of inputed user
-            for othersLikes in profiles[name]['likes']:
-                for inputedUserLikes in profiles[nameOfInput2]["likes"]:
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[nameOfInput2]['gender']:
 
-                    #Give 5 points for each like that matches to that person
-                    if inputedUserLikes ==  othersLikes :
-                        Likes_comp_dict[name] = (int(Likes_comp_dict[name]) + 5)
+                #For each likes in other people in the profile list, compare them to each likes of inputed user
+                for othersLikes in profiles[name]['likes']:
+                    for inputedUserLikes in profiles[nameOfInput2]["likes"]:
+
+                        #Give 5 points for each like that matches to that person
+                        if inputedUserLikes ==  othersLikes :
+                            Likes_comp_dict[name] = (int(Likes_comp_dict[name]) + 5)
 
     return Likes_comp_dict
 
@@ -112,13 +120,16 @@ def dislikesCompatibility(inputPerson_Name):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != str(inputPerson_Name):
 
-            #For each dislikes in other people in the profile list, compare them to each dislikes of inputed user
-            for othersDislikes in profiles[name]['dislikes']:
-                for inputedUserDislikes in profiles[str(inputPerson_Name)]["dislikes"]:
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[inputPerson_Name]['gender']:
+                
+                #For each dislikes in other people in the profile list, compare them to each dislikes of inputed user
+                for othersDislikes in profiles[name]['dislikes']:
+                    for inputedUserDislikes in profiles[str(inputPerson_Name)]["dislikes"]:
 
-                    #Give 5 points for each dislike that matches to that person
-                    if inputedUserDislikes ==  othersDislikes :
-                        Dislikes_comp_dict[name] = (int(Dislikes_comp_dict[name]) + 5)
+                        #Give 5 points for each dislike that matches to that person
+                        if inputedUserDislikes ==  othersDislikes :
+                            Dislikes_comp_dict[name] = (int(Dislikes_comp_dict[name]) + 5)
 
     return Dislikes_comp_dict
 
@@ -135,13 +146,16 @@ def bothLikesDislikesCompatibility(inputedPersonName):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != str(inputedPersonName):
 
-            #For each dislikes in other people in the profile list, compare them to each likes of inputed user
-            for othersDislikes in profiles[name]['dislikes']:
-                for inputedUserLikes in profiles[str(inputedPersonName)]["likes"]:
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
+                
+                #For each dislikes in other people in the profile list, compare them to each likes of inputed user
+                for othersDislikes in profiles[name]['dislikes']:
+                    for inputedUserLikes in profiles[str(inputedPersonName)]["likes"]:
 
-                    #Take away 5 points for each dislike and likes that matches
-                    if inputedUserLikes ==  othersDislikes :
-                        dislikesToLikes[name] = (int(dislikesToLikes[name]) - 5)
+                        #Take away 5 points for each dislike and likes that matches
+                        if inputedUserLikes ==  othersDislikes :
+                            dislikesToLikes[name] = (int(dislikesToLikes[name]) - 5)
 
 
     likesToDislikes ={} #initialise likesToDislikes as a dictionary
@@ -153,13 +167,16 @@ def bothLikesDislikesCompatibility(inputedPersonName):
         #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
         if name != str(inputedPersonName):
 
-            #For each likes in other people in the profile list, compare them to each dislikes of inputed user
-            for othersLikes in profiles[name]['likes']:
-                for inputedUserDislikes in profiles[str(inputedPersonName)]["dislikes"]:
+            #Only opposite gender
+            if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
+                
+                #For each likes in other people in the profile list, compare them to each dislikes of inputed user
+                for othersLikes in profiles[name]['likes']:
+                    for inputedUserDislikes in profiles[str(inputedPersonName)]["dislikes"]:
 
-                    #Take away 5 points for each dislike and likes that matches
-                    if inputedUserDislikes ==  othersLikes :
-                        likesToDislikes[name] = (int(likesToDislikes[name]) - 5)
+                        #Take away 5 points for each dislike and likes that matches
+                        if inputedUserDislikes ==  othersLikes :
+                            likesToDislikes[name] = (int(likesToDislikes[name]) - 5)
 
     #Sum up the total number of points taken away for Likes and Dislikes that matches
     bothLikesDislikes = dict(dislikesToLikes.items() + likesToDislikes.items() + [(k, dislikesToLikes[k] + likesToDislikes[k]) for k in set(likesToDislikes) & set(dislikesToLikes)])
