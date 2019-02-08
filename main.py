@@ -30,7 +30,7 @@ def read_profiles():
 
 
     # Function 1,2,3 (Based on Project 1 Description.pdf)
-def selected_user_menu(user_profile, profiles):
+def selected_user_menu(user_profile, profiles, storetodict):
     #  show menu after user selected the profiles.
     # except for logged in user profile wont be visable in the options.
     while True:
@@ -45,28 +45,31 @@ def selected_user_menu(user_profile, profiles):
 
         if menu_number == 0:
             # return to previous state when 0 is selected
-            return
+            # print data that is stored in dict
+            return storetodict
         elif menu_number == 1:
             yongjie.view_profiles(profiles)
         elif menu_number == 2:
-            yongjie.matched_by_countries(user_profile=user_profile, profiles=profiles)
+            yongjie.matched_by_countries(user_profile=user_profile, profiles=profiles, storetodict=storetodict)
         elif menu_number == 3:
-            yongjie.matched_likes(user_profile=user_profile, profiles=profiles)
+            yongjie.matched_likes(user_profile=user_profile, profiles=profiles, storetodict=storetodict)
         elif menu_number == 4:
-            yongjie.matched_dislikes(user_profile=user_profile, profiles=profiles)
+            yongjie.matched_dislikes(user_profile=user_profile, profiles=profiles, storetodict=storetodict)
 
 def menu():
     # Main function to start the application.
+    storetodict = list()
     while True:
         print("1- Select A User As\n")
         print("2- Register \n")
         menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
         if menu_number == 0:
+            raw_input("Enter any key to quit!!")
             return
         elif menu_number == 1:
             profiles = read_profiles()
             user_profile = calluser.select_user(profiles)
-            selected_user_menu(user_profile=user_profile, profiles=profiles)
+            storetodict = selected_user_menu(user_profile=user_profile, profiles=profiles, storetodict= storetodict)
         elif menu_number == 2:
             calluser.add_new_user()
         else:

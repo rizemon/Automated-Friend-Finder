@@ -15,11 +15,13 @@ def view_profiles(profiles):
     yongjiefuncs.eval(profiles.values())
 
 
+
+
     # Function 2: List all the matched students of one given student B based on
     # country (e.g all the students that fall in to the acceptable country of
     # B should be printed out)
 
-def matched_by_countries(user_profile, profiles):
+def matched_by_countries(user_profile, profiles, storetodict):
     # Compare other user profile with the selected user acceptable country range
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     filtered_profiles = yongjiefuncs.filter_in_acceptable_age_range(filtered_profiles, user_profile)
@@ -29,7 +31,7 @@ def matched_by_countries(user_profile, profiles):
         raw_input("Enter any key to continue")
         return
     yongjiefuncs.print_profile_lists(filtered_profiles, reason="country")
-    yongjiefuncs.eval(filtered_profiles)
+    yongjiefuncs.eval(filtered_profiles, storetodict=storetodict)
 
 
 
@@ -38,7 +40,7 @@ def matched_by_countries(user_profile, profiles):
     # similarity metrics (e.g # of shared likes/dislikes etc ) in order to rank
     # their similarity
 
-def matched_likes(user_profile, profiles):
+def matched_likes(user_profile, profiles, storetodict):
     # filter by opp gender
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     # filter profile by acceptable age range
@@ -60,10 +62,10 @@ def matched_likes(user_profile, profiles):
         return
 
     yongjiefuncs.print_profile_lists(likes, reason="likes")
-    yongjiefuncs.eval(likes)
+    yongjiefuncs.eval(likes, storetodict=storetodict)
 
 
-def matched_dislikes(user_profile, profiles):
+def matched_dislikes(user_profile, profiles, storetodict):
     # filter by opp gender
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     # filter profile by acceptable age range
@@ -84,4 +86,4 @@ def matched_dislikes(user_profile, profiles):
         raw_input("Enter any key to continue !")
         return
     yongjiefuncs.print_profile_lists(dislikes, reason="dislikes")
-    yongjiefuncs.eval(dislikes)
+    yongjiefuncs.eval(dislikes, storetodict=storetodict)

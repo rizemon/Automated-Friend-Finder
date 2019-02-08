@@ -71,8 +71,8 @@ def top_profiles(profiles, key, top=3):
     # return non 0 top profiles
     return [p for p in ordered[:top] if p[key]]
 
-
-def eval(profiles):
+#store to dict i set to none because we dont want to save logs in case of function 1
+def eval(profiles, storetodict=None):
     # this function lets user to see profiles of users by states function
     # e.g profile by matched country
     # 1- Mr A
@@ -87,7 +87,6 @@ def eval(profiles):
             print("Index out of bound. Please enter again !")
         else:
             print_profile(profiles[index - 1])
-
 
 def list_to_str(to_convert):
     # this function converts a list to string separated by ,
@@ -129,7 +128,7 @@ def print_profile(row):
 
 
 def print_profile_lists(profiles, reason):
-    # this function print top 3 profiles for option 2 3 and 4
+    # this function print top 3 profiles for function 3 and 4
     index = 1
     for profile in profiles:
         title = person_title(profile['gender'])
