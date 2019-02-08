@@ -262,7 +262,7 @@ def overallCompatibility(name):
     overallCompatibility = dict(Temp3.items() + (bothLikesDislikesCompatibility(name)).items() + [(k, (Temp3)[k] + (bothLikesDislikesCompatibility(name))[k]) for k in set(bothLikesDislikesCompatibility(name)) & set(Temp3)])
 
     #To sort each person name whereby first is most compatible and third is second runner up
-    #If there are at least 3 people that are the opposite gender in the dictionary
+    #If there are at least 3 people that are the opposite gender and age range in the dictionary
     if len(overallCompatibility) == 3:
         
         for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
@@ -310,7 +310,7 @@ def overallCompatibility(name):
         #return final output
         return listOutput
 
-    #If there are only 2 people that are the opposite gender in the dictionary
+    #If there are only 2 people that are the opposite gender and age range in the dictionary
     elif len(overallCompatibility) == 2:
         
         for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
@@ -348,7 +348,7 @@ def overallCompatibility(name):
         #return final output
         return listOutput
 
-    #If there are only 1 people that are the opposite gender in the dictionary
+    #If there are only 1 people that is the opposite gender and age range in the dictionary
     elif len(overallCompatibility) == 1:
         
         for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
@@ -374,7 +374,7 @@ def overallCompatibility(name):
         #return final output
         return listOutput
 
-    #If there are no people that are the opposite gender in the dictionary
+    #If there are no people that are the opposite gender and age range in the dictionary
     elif len(overallCompatibility) == 0:
         
         #To create a new list to store the top 3 profiles
