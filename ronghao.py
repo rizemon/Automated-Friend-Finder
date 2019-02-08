@@ -19,6 +19,30 @@ def country(person):
     return profiles[person]["country"]
 
 
+def age_not_in_range(naMe):
+    age_Not_In_Range = [] #initialise age_Not_In_Range as a list
+    Age_compat_dict1 = {} #initialise Age_compat_dict1 as a dict
+    
+    #For each individual profiles
+    for name in profiles.keys():
+
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[naMe]['gender']:
+            
+                Age_compat_dict1[name] = 0
+                #Compare everyone's age with the person's acceptable age range
+                for Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
+
+                    #if their age is in the person acceptable age range, give that individual 25 points
+                    if (profiles[naMe]["age"] ==  Age_Range) :
+                        Age_compat_dict1[name] = 25
+
+    #if their age is not in the person acceptable age range(0 points), append that individual to age_Not_In_Range
+    for name in Age_compat_dict1.keys():
+        if Age_compat_dict1[name] == 0:
+                age_Not_In_Range.append(name) 
+                        
+    return age_Not_In_Range
 
 #If country is someone else acceptable country, give 25 points to that person
 def countryCompatibility(PersonInputed2):  
@@ -40,7 +64,12 @@ def countryCompatibility(PersonInputed2):
                     #if their country is also the person acceptable country, add 25 points to that individual
                         if (profiles[name]["country"] ==  acc_country) :
                             Country_compat_dict[name] = 25
-            
+
+        #Only people in matched age range   
+        for names in age_not_in_range(PersonInputed2):
+            if names == name:
+                del Country_compat_dict[name]
+        
     return Country_compat_dict
 
 
@@ -48,7 +77,6 @@ def countryCompatibility(PersonInputed2):
 #Return Person's age (person need to be input as string)
 def age(input_Person):
     return profiles[input_Person]["age"]
-
 
 
 #If age is someone else Acceptable age range, give 25 points to that person
@@ -68,10 +96,15 @@ def ageCompatibility(inputName):
                     #Compare everyone's age with the person's acceptable age range
                     for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
 
-                        #if their age is in the person acceptable age range, add 25 points to that individual
+                        #if their age is in the person acceptable age range, add 25 points to that individual. Else, remove that person from the list
                         if (profiles[inputName]["age"] ==  acc_Age_Range) :
                             Age_comp_dict[name] = 25
-
+                            
+           #Only people in matched age range
+            for names in age_not_in_range(inputName):
+                if names == name:
+                    del Age_comp_dict[name]             
+        
     return Age_comp_dict
 
 
@@ -103,6 +136,12 @@ def likesCompatibility(nameOfInput2):
                             if inputedUserLikes ==  othersLikes :
                                 Likes_comp_dict[name] = (int(Likes_comp_dict[name]) + 5)
 
+
+        #Only people in matched age range
+        for names in age_not_in_range(nameOfInput2):
+            if names == name:
+                del Likes_comp_dict[name]
+
     return Likes_comp_dict
 
 
@@ -133,6 +172,12 @@ def dislikesCompatibility(inputPerson_Name):
                         if inputedUserDislikes ==  othersDislikes :
                             Dislikes_comp_dict[name] = (int(Dislikes_comp_dict[name]) + 5)
 
+
+        #Only people in matched age range
+        for names in age_not_in_range(inputPerson_Name):
+            if names == name:
+                del Dislikes_comp_dict[name]
+
     return Dislikes_comp_dict
 
 
@@ -160,6 +205,11 @@ def bothLikesDislikesCompatibility(inputedPersonName):
                         if inputedUserLikes ==  othersDislikes :
                             dislikesToLikes[name] = (int(dislikesToLikes[name]) - 5)
 
+        #Only people in matched age range
+        for names in age_not_in_range(inputedPersonName):
+            if names == name:
+                del dislikesToLikes[name]
+
 
     likesToDislikes ={} #initialise likesToDislikes as a dictionary
 
@@ -181,6 +231,11 @@ def bothLikesDislikesCompatibility(inputedPersonName):
                         #Take away 5 points for each dislike and likes that matches
                         if inputedUserDislikes ==  othersLikes :
                             likesToDislikes[name] = (int(likesToDislikes[name]) - 5)
+
+            #Only people in matched age range
+            for names in age_not_in_range(inputedPersonName):
+                if names == name:
+                    del likesToDislikes[name]
 
     #Sum up the total number of points taken away for Likes and Dislikes that matches
     bothLikesDislikes = dict(dislikesToLikes.items() + likesToDislikes.items() + [(k, dislikesToLikes[k] + likesToDislikes[k]) for k in set(likesToDislikes) & set(dislikesToLikes)])
