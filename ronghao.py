@@ -25,20 +25,21 @@ def countryCompatibility(PersonInputed2):
     Country_compat_dict = {} #initialise countryCompat as a dictionary
 
     #For each individual profiles
-    for name in profiles.keys(): 
-        Country_compat_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
-        
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != PersonInputed2:
+    for name in profiles.keys():
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[PersonInputed2]['gender']:
+            
+            Country_compat_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
+            
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != PersonInputed2:
 
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[PersonInputed2]['gender']:
-            #Compare everyone country with the person input by the user acceptable country
-                for acc_country in profiles[name]['acceptable_country']:
+                #Compare everyone country with the person input by the user acceptable country
+                    for acc_country in profiles[name]['acceptable_country']:
 
-                #if their country is also the person acceptable country, add 25 points to that individual
-                    if (profiles[name]["country"] ==  acc_country) :
-                        Country_compat_dict[name] = 25
+                    #if their country is also the person acceptable country, add 25 points to that individual
+                        if (profiles[name]["country"] ==  acc_country) :
+                            Country_compat_dict[name] = 25
             
     return Country_compat_dict
 
@@ -56,20 +57,20 @@ def ageCompatibility(inputName):
 
     #For each individual profiles
     for name in profiles.keys():
-        Age_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != inputName:
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[inputName]['gender']:
+            Age_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[inputName]['gender']:
-                
-                #Compare everyone's age with the person's acceptable age range
-                for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != inputName:
+                    
+                    #Compare everyone's age with the person's acceptable age range
+                    for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
 
-                    #if their age is in the person acceptable age range, add 25 points to that individual
-                    if (profiles[inputName]["age"] ==  acc_Age_Range) :
-                        Age_comp_dict[name] = 25
+                        #if their age is in the person acceptable age range, add 25 points to that individual
+                        if (profiles[inputName]["age"] ==  acc_Age_Range) :
+                            Age_comp_dict[name] = 25
 
     return Age_comp_dict
 
@@ -85,21 +86,22 @@ def likesCompatibility(nameOfInput2):
 
     #For each individual profiles
     for name in profiles.keys():
-        Likes_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
+        
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[nameOfInput2]['gender']:
+            
+            Likes_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != str(nameOfInput2):
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != str(nameOfInput2):
 
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[nameOfInput2]['gender']:
+                    #For each likes in other people in the profile list, compare them to each likes of inputed user
+                    for othersLikes in profiles[name]['likes']:
+                        for inputedUserLikes in profiles[nameOfInput2]["likes"]:
 
-                #For each likes in other people in the profile list, compare them to each likes of inputed user
-                for othersLikes in profiles[name]['likes']:
-                    for inputedUserLikes in profiles[nameOfInput2]["likes"]:
-
-                        #Give 5 points for each like that matches to that person
-                        if inputedUserLikes ==  othersLikes :
-                            Likes_comp_dict[name] = (int(Likes_comp_dict[name]) + 5)
+                            #Give 5 points for each like that matches to that person
+                            if inputedUserLikes ==  othersLikes :
+                                Likes_comp_dict[name] = (int(Likes_comp_dict[name]) + 5)
 
     return Likes_comp_dict
 
@@ -115,13 +117,13 @@ def dislikesCompatibility(inputPerson_Name):
     #For each individual profiles
     for name in profiles.keys():
 
-        Dislikes_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[inputPerson_Name]['gender']:
+            
+            Dislikes_comp_dict[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != str(inputPerson_Name):
-
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[inputPerson_Name]['gender']:
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != str(inputPerson_Name):
                 
                 #For each dislikes in other people in the profile list, compare them to each dislikes of inputed user
                 for othersDislikes in profiles[name]['dislikes']:
@@ -141,14 +143,15 @@ def bothLikesDislikesCompatibility(inputedPersonName):
 
     #For each individual profiles
     for name in profiles.keys():
-        dislikesToLikes[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != str(inputedPersonName):
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
+            
+            dislikesToLikes[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
-                
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != str(inputedPersonName):
+             
                 #For each dislikes in other people in the profile list, compare them to each likes of inputed user
                 for othersDislikes in profiles[name]['dislikes']:
                     for inputedUserLikes in profiles[str(inputedPersonName)]["likes"]:
@@ -162,13 +165,14 @@ def bothLikesDislikesCompatibility(inputedPersonName):
 
     #For each individual profiles
     for name in profiles.keys():
-        likesToDislikes[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-        #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
-        if name != str(inputedPersonName):
+        #Only opposite gender
+        if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
+            
+            likesToDislikes[name] = 0 #Give everyone a starting points of 0 by using a dict whereby "name": points
 
-            #Only opposite gender
-            if profiles[name]['gender'] != profiles[inputedPersonName]['gender']:
+            #if the person input by the user is found in the list of profile, do nothing. This is to avoid giving himself points
+            if name != str(inputedPersonName):
                 
                 #For each likes in other people in the profile list, compare them to each dislikes of inputed user
                 for othersLikes in profiles[name]['likes']:
@@ -203,49 +207,123 @@ def overallCompatibility(name):
     overallCompatibility = dict(Temp3.items() + (bothLikesDislikesCompatibility(name)).items() + [(k, (Temp3)[k] + (bothLikesDislikesCompatibility(name))[k]) for k in set(bothLikesDislikesCompatibility(name)) & set(Temp3)])
 
     #To sort each person name whereby first is most compatible and third is second runner up
-    for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
-       k =(key, value)
-       sortedoverallCompatibility.append(k)
-    first = sortedoverallCompatibility[0][0]
-    second = sortedoverallCompatibility[1][0]
-    third = sortedoverallCompatibility[2][0]
+    #If there are at least 3 people that are the opposite gender in the dictionary
+    if len(overallCompatibility) == 3:
+        
+        for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
+           k =(key, value)
+           sortedoverallCompatibility.append(k)
+        first = sortedoverallCompatibility[0][0]
+        second = sortedoverallCompatibility[1][0]
+        third = sortedoverallCompatibility[2][0]
 
-    #To create a new list to store the top 3 profiles
-    listOutput=[]
+        #To create a new list to store the top 3 profiles
+        listOutput=[]
 
-    #To create a new dict to store most compatible person profile
-    profile1={}
+        #To create a new dict to store most compatible person profile
+        profile1={}
 
-    #To create a new dict to store first runner up person profile
-    profile2={}
+        #To create a new dict to store first runner up person profile
+        profile2={}
 
-    #To create a new dict to store second runner up person profile
-    profile3={}
+        #To create a new dict to store second runner up person profile
+        profile3={}
 
-    profile1["gender"]=profiles[first]["gender"] #storing gender into profile1
-    profile1["age"]=profiles[first]["age"] #storing age into profile1
-    profile1["name"]=first #storing name into profile1
-    profile1["country"]=profiles[first]["country"] #storing country into profile1
-
-
-    profile2["gender"]=profiles[second]["gender"] #storing gender into profile1
-    profile2["age"]=profiles[second]["age"] #storing age into profile1
-    profile2["name"]=second #storing name into profile1
-    profile2["country"]=profiles[second]["country"] #storing country into profile1
+        profile1["gender"]=profiles[first]["gender"] #storing gender into profile1
+        profile1["age"]=profiles[first]["age"] #storing age into profile1
+        profile1["name"]=first #storing name into profile1
+        profile1["country"]=profiles[first]["country"] #storing country into profile1
 
 
-    profile3["gender"]=profiles[third]["gender"] #storing gender into profile1
-    profile3["age"]=profiles[third]["age"] #storing age into profile1
-    profile3["name"]=third #storing name into profile1
-    profile3["country"]=profiles[third]["country"] #storing country into profile1
-    
+        profile2["gender"]=profiles[second]["gender"] #storing gender into profile1
+        profile2["age"]=profiles[second]["age"] #storing age into profile1
+        profile2["name"]=second #storing name into profile1
+        profile2["country"]=profiles[second]["country"] #storing country into profile1
 
-    #append profile1,profile2 and proifle3 into listOutput
-    listOutput.append(profile1)
-    listOutput.append(profile2)
-    listOutput.append(profile3)
 
-    #return final output
-    return listOutput
-    
-    
+        profile3["gender"]=profiles[third]["gender"] #storing gender into profile1
+        profile3["age"]=profiles[third]["age"] #storing age into profile1
+        profile3["name"]=third #storing name into profile1
+        profile3["country"]=profiles[third]["country"] #storing country into profile1
+        
+
+        #append profile1,profile2 and proifle3 into listOutput
+        listOutput.append(profile1)
+        listOutput.append(profile2)
+        listOutput.append(profile3)
+
+        #return final output
+        return listOutput
+
+    #If there are only 2 people that are the opposite gender in the dictionary
+    elif len(overallCompatibility) == 2:
+        
+        for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
+           k =(key, value)
+           sortedoverallCompatibility.append(k)
+        first = sortedoverallCompatibility[0][0]
+        second = sortedoverallCompatibility[1][0]
+
+        #To create a new list to store the top 3 profiles
+        listOutput=[]
+
+        #To create a new dict to store most compatible person profile
+        profile1={}
+
+        #To create a new dict to store first runner up person profile
+        profile2={}
+
+
+        profile1["gender"]=profiles[first]["gender"] #storing gender into profile1
+        profile1["age"]=profiles[first]["age"] #storing age into profile1
+        profile1["name"]=first #storing name into profile1
+        profile1["country"]=profiles[first]["country"] #storing country into profile1
+
+
+        profile2["gender"]=profiles[second]["gender"] #storing gender into profile1
+        profile2["age"]=profiles[second]["age"] #storing age into profile1
+        profile2["name"]=second #storing name into profile1
+        profile2["country"]=profiles[second]["country"] #storing country into profile1
+        
+
+        #append profile1,profile2 and proifle3 into listOutput
+        listOutput.append(profile1)
+        listOutput.append(profile2)
+
+        #return final output
+        return listOutput
+
+    #If there are only 1 people that are the opposite gender in the dictionary
+    elif len(overallCompatibility) == 1:
+        
+        for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
+           k =(key, value)
+           sortedoverallCompatibility.append(k)
+        first = sortedoverallCompatibility[0][0]
+
+        #To create a new list to store the top 3 profiles
+        listOutput=[]
+
+        #To create a new dict to store most compatible person profile
+        profile1={}
+
+        profile1["gender"]=profiles[first]["gender"] #storing gender into profile1
+        profile1["age"]=profiles[first]["age"] #storing age into profile1
+        profile1["name"]=first #storing name into profile1
+        profile1["country"]=profiles[first]["country"] #storing country into profile1
+        
+
+        #append profile1,profile2 and proifle3 into listOutput
+        listOutput.append(profile1)
+
+        #return final output
+        return listOutput
+
+    #If there are no people that are the opposite gender in the dictionary
+    elif len(overallCompatibility) == 0:
+        
+        #To create a new list to store the top 3 profiles
+        listOutput=[]
+
+        #return final output
+        return listOutput
