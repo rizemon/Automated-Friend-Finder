@@ -50,7 +50,7 @@ def viewBestMatch(field):
     resp = []
 
     # Retrieve name from GET parameters
-    profile_name = request.args.get("name", default="", type=str)
+    profile_name = request.args.get("current_profile", default="", type=str)
 
     if field == "country":
         # Retrieve best matches by country
@@ -63,7 +63,8 @@ def viewBestMatch(field):
         resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
     elif field == "overall":
         # Retrieve best matches by overall information
-        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        # resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        resp = ronghao.viewMatchesOverall(profiles, profile_name)
     else:
         abort(404)
         return
@@ -109,9 +110,6 @@ if __name__ == "__main__":
 
     # Function 4
     jiale.viewMatchesBooks(profiles)
-
-    # Function 5
-    ronghao.viewMatchesOverall(profiles, "Carol")
 
     # Function 6
     william.storeCSV()
