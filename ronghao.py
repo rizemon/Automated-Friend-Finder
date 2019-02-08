@@ -263,7 +263,7 @@ def overallCompatibility(name):
 
     #To sort each person name whereby first is most compatible and third is second runner up
     #If there are at least 3 people that are the opposite gender and age range in the dictionary
-    if len(overallCompatibility) == 3:
+    if len(overallCompatibility) >= 3:
         
         for key, value in sorted(overallCompatibility.iteritems(),reverse =True, key=lambda (k,v): (v,k)):
            k =(key, value)
