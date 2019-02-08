@@ -111,7 +111,7 @@ if __name__ == "__main__":
     jiale.viewMatchesBooks(profiles)
 
     # Function 5
-    ronghao.viewMatchesOverall(profiles)
+    ronghao.viewMatchesOverall(profiles, "Carol")
 
     # Function 6
     william.storeCSV()
