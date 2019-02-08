@@ -31,10 +31,10 @@ def age_not_in_range(naMe):
             
                 Age_compat_dict1[name] = 0
                 #Compare everyone's age with the person's acceptable age range
-                for Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
+                for Age_Range in (range((profiles[naMe]['acceptable_age_range']['start']),(profiles[naMe]['acceptable_age_range']['end']))):
 
                     #if their age is in the person acceptable age range, give that individual 25 points
-                    if (profiles[naMe]["age"] ==  Age_Range) :
+                    if (profiles[name]["age"] ==  Age_Range) :
                         Age_compat_dict1[name] = 25
 
     #if their age is not in the person acceptable age range(0 points), append that individual to age_Not_In_Range
@@ -94,10 +94,10 @@ def ageCompatibility(inputName):
             if name != inputName:
                     
                     #Compare everyone's age with the person's acceptable age range
-                    for acc_Age_Range in (range((profiles[name]['acceptable_age_range']['start']),(profiles[name]['acceptable_age_range']['end']))):
+                    for acc_Age_Range in (range((profiles[inputName]['acceptable_age_range']['start']),(profiles[inputName]['acceptable_age_range']['end']))):
 
                         #if their age is in the person acceptable age range, add 25 points to that individual. Else, remove that person from the list
-                        if (profiles[inputName]["age"] ==  acc_Age_Range) :
+                        if (profiles[name]["age"] ==  acc_Age_Range) :
                             Age_comp_dict[name] = 25
                             
            #Only people in matched age range
