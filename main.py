@@ -109,7 +109,11 @@ if __name__ == "__main__":
     yongjie.viewMatchesLikesDislikes(profiles)
 
     # Function 4
-    jiale.viewMatchesBooks(profiles)
+    # jiale.viewMatchesBooks(profiles)
+    matches_books = jiale.getMatchesBooks(profiles)
+    # Print top three for each person based on books
+    for name in profiles:
+        print "%s's top three based on books: %s" % (name, jiale.getTopThree(name, matches_books))
 
     # Function 6
     william.storeCSV()
