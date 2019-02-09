@@ -16,8 +16,8 @@ def checkPossiblePartner(person1, person2, profiles):
     if profiles[person1]["gender"] == profiles[person2]["gender"]:
         return False
     # Check if person2's country in the acceptable_country of person1
-    if profiles[person2]["country"] not in profiles[person1]["acceptable_country"]:
-        return False
+    # if profiles[person2]["country"] not in profiles[person1]["acceptable_country"]:
+    #     return False
     # Check if person2's age is in the acceptable_age_range of person1
     if not (profiles[person1]["acceptable_age_range"]["start"]
             <= profiles[person2]["age"]
@@ -45,9 +45,13 @@ def calculateSimilarity(person1, person2, interests):
     return similarity
 
 
-def getTopThree(name, matches):
+def viewMatchesBooks(profiles, matches, name):
     # Perform sorting in descending order and retrieve top 3 persons with similar interests for a given person
-    return sorted(matches[name], reverse=True)[:3]
+    return [{
+        "name": partner_name,
+        "gender":profiles[partner_name]["gender"],
+        "age":profiles[partner_name]["age"],
+        "country":profiles[partner_name]["country"]} for partner_name in sorted(matches[name], reverse=True)[:3]]
 
 
 def getMatchesBooks(profiles):
@@ -64,7 +68,7 @@ def getMatchesBooks(profiles):
         if name not in interests:
             # Initialize the empty list of possible interests
             interests[name] = set()
-            # Initialize the similarity score between the current profile and the others' profiles to 0
+            # Initialize the similarity score between the current profile and the possible partners' profiles to 0
             matches[name] = {partner_name: 0 for partner_name in profiles.keys()
                              if checkPossiblePartner(name, partner_name, profiles)}
 
@@ -75,14 +79,17 @@ def getMatchesBooks(profiles):
             # Append keywords that are nouns to the current profile's list of possible interests
             interests[name].update([word for word in token_list if isNoun(word)])
 
-    # Loop through each possible pair of profiles
+    # Loop through each name
     for name in matches:
+        # Loop through each possible partner of name
         for partner_name in matches[name]:
-            # Check if the score between the pair has already been calculated
-            if matches[name][partner_name] == 0 or matches[partner_name][name] == 0:
-                # Calculate the score based on each profile's list of interests
+            # Check if the score between name and partner_name has already been calculated
+            if matches[name][partner_name] == 0:
+                # Calculate the score based on both profile's list of interests
                 matches[name][partner_name] = calculateSimilarity(name, partner_name, interests)
-                # Make sure the score is bidirectional
-                matches[partner_name][name] = matches[name][partner_name]
+                # Check if name is also a possible partner of partner_name
+                if name in matches[partner_name]:
+                    # Make sure the score is bidirectional
+                    matches[partner_name][name] = matches[name][partner_name]
 
     return matches
