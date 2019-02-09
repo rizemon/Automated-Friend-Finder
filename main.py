@@ -21,6 +21,7 @@ CORS(app)
 # profiles dictionary to be accessed by all functions
 profiles = {}
 piecharts = {}
+matches_books = {}
 
 @app.route('/')
 def index():
@@ -37,7 +38,8 @@ def viewAll():
 
     # Return a JSON of an array of all profiles
 
-    resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+    resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"],
+             "country": profiles[name]["country"]} for name in profiles]
 
     # Output as JSON
     return jsonify(resp)
@@ -54,16 +56,19 @@ def viewBestMatch(field):
 
     if field == "country":
         # Retrieve best matches by country
-        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"],
+                 "country": profiles[name]["country"]} for name in profiles]
     elif field == "likes":
         # Retrieve best matches by likes/dislikes
-        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"],
+                 "country": profiles[name]["country"]} for name in profiles]
     elif field == "books":
         # Retrieve best matches by books
-        resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        # resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"], "country": profiles[name]["country"]} for name in profiles]
+        resp = jiale.viewMatchesBooks(profiles, matches_books, profile_name)
     elif field == "overall":
         # Retrieve best matches by overall information
-        # resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"]} for name in profiles]
+        # resp = [{"name": name, "gender": profiles[name]["gender"], "age": profiles[name]["age"], "country": profiles[name]["country"]} for name in profiles]
         resp = ronghao.viewMatchesOverall(profiles, profile_name)
     else:
         abort(404)
@@ -109,11 +114,7 @@ if __name__ == "__main__":
     yongjie.viewMatchesLikesDislikes(profiles)
 
     # Function 4
-    # jiale.viewMatchesBooks(profiles)
     matches_books = jiale.getMatchesBooks(profiles)
-    # Print top three for each person based on books
-    for name in profiles:
-        print "%s's top three based on books: %s" % (name, jiale.getTopThree(name, matches_books))
 
     # Function 6
     william.storeCSV()
