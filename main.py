@@ -11,7 +11,7 @@ import yongjie
 import ronghao
 import kijoon
 import jiale
-import william
+import matchexport
 
 # Initialize Flask application
 app = Flask(__name__)
@@ -116,8 +116,7 @@ if __name__ == "__main__":
     # Function 4
     matches_books = jiale.getMatchesBooks(profiles)
 
-    # Function 6
-    william.storeCSV()
+
 
     # Pre-compute all pie charts
     piecharts["likes"] = piechart.display_data_likes(profiles)
