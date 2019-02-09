@@ -46,7 +46,7 @@ def selected_user_menu(user_profile, profiles, storetodict):
         if menu_number == 0:
             # return to previous state when 0 is selected
             # print data that is stored in dict
-            return storetodict
+            return
         elif menu_number == 1:
             yongjie.view_profiles(profiles)
         elif menu_number == 2:
@@ -64,6 +64,8 @@ def menu():
         print("2- Register \n")
         menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
         if menu_number == 0:
+            for log in storetodict:
+                pretty_print(log)
             raw_input("Enter any key to quit!!")
             return
         elif menu_number == 1:

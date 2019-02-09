@@ -15,8 +15,6 @@ def view_profiles(profiles):
     yongjiefuncs.eval(profiles.values())
 
 
-
-
     # Function 2: List all the matched students of one given student B based on
     # country (e.g all the students that fall in to the acceptable country of
     # B should be printed out)
@@ -30,8 +28,8 @@ def matched_by_countries(user_profile, profiles, storetodict):
         print("No Matched profile found")
         raw_input("Enter any key to continue")
         return
-    yongjiefuncs.print_profile_lists(filtered_profiles, reason="country")
-    yongjiefuncs.eval(filtered_profiles, storetodict=storetodict)
+    yongjiefuncs.print_profile_lists(filtered_profiles, reason="country", storetodict = storetodict)
+    yongjiefuncs.eval(filtered_profiles)
 
 
 
@@ -61,8 +59,8 @@ def matched_likes(user_profile, profiles, storetodict):
         raw_input("Input any key to continue !")
         return
 
-    yongjiefuncs.print_profile_lists(likes, reason="likes")
-    yongjiefuncs.eval(likes, storetodict=storetodict)
+    yongjiefuncs.print_profile_lists(likes, reason="likes", storetodict = storetodict)
+    yongjiefuncs.eval(likes)
 
 
 def matched_dislikes(user_profile, profiles, storetodict):
@@ -85,5 +83,5 @@ def matched_dislikes(user_profile, profiles, storetodict):
         print("No matching dislikes found")
         raw_input("Enter any key to continue !")
         return
-    yongjiefuncs.print_profile_lists(dislikes, reason="dislikes")
-    yongjiefuncs.eval(dislikes, storetodict=storetodict)
+    yongjiefuncs.print_profile_lists(dislikes, reason="dislikes", storetodict = storetodict)
+    yongjiefuncs.eval(dislikes)

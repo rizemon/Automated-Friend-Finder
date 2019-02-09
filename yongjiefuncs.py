@@ -72,7 +72,7 @@ def top_profiles(profiles, key, top=3):
     return [p for p in ordered[:top] if p[key]]
 
 #store to dict i set to none because we dont want to save logs in case of function 1
-def eval(profiles, storetodict=None):
+def eval(profiles):
     # this function lets user to see profiles of users by states function
     # e.g profile by matched country
     # 1- Mr A
@@ -86,7 +86,25 @@ def eval(profiles, storetodict=None):
         if index > len(profiles):
             print("Index out of bound. Please enter again !")
         else:
-            print_profile(profiles[index - 1])
+            #print_profile(profiles[index - 1])
+            user_profile = profiles[index - 1]
+
+
+            # this function prints profile on console, remove this if not required
+            print_profile(user_profile)
+            # #
+            # if storetodict is not None:
+            #     storetodict.append({
+            #         'name': user_profile['name'],
+            #         'gender': user_profile['gender'],
+            #         'age': user_profile['age'],
+            #         'country': user_profile['country']
+            #     })
+
+
+
+
+
 
 def list_to_str(to_convert):
     # this function converts a list to string separated by ,
@@ -127,7 +145,7 @@ def print_profile(row):
                                  ))
 
 
-def print_profile_lists(profiles, reason):
+def print_profile_lists(profiles, reason, storetodict):
     # this function print top 3 profiles for function 3 and 4
     index = 1
     for profile in profiles:
@@ -139,8 +157,16 @@ def print_profile_lists(profiles, reason):
 
         print('{}. {} {}, Age {}, {}: {}'.format(
             index, title, profile['name'], profile['age'], reason, reason_value))
-        index += 1
 
+        if storetodict is not None:
+            storetodict.append({
+                'name': profile['name'],
+                'gender': profile['gender'],
+                'age': profile['age'],
+                'country': profile['country']
+            })
+        index += 1
+    print storetodict
 
 def filter_same_gender(user_profile, profiles):
     # this function filter same gender from profiles
