@@ -7,7 +7,7 @@ import yongjie
 import ronghao
 import kijoon
 import jiale
-import william
+
 import piechart
 import matchexport
 
@@ -37,8 +37,6 @@ if __name__ == "__main__":
     # Function 5
     ronghao.viewMatchesOverall(profiles)
 
-    # Function 6
-    william.storeCSV()
 
     # Open function
     kijoon.openFunction(profiles)
