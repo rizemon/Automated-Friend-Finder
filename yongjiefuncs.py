@@ -145,7 +145,7 @@ def print_profile(row):
                                  ))
 
 
-def print_profile_lists(profiles, reason, storetodict):
+def print_profile_lists(profiles, reason):
     # this function print top 3 profiles for function 3 and 4
     index = 1
     for profile in profiles:
@@ -158,15 +158,15 @@ def print_profile_lists(profiles, reason, storetodict):
         print('{}. {} {}, Age {}, {}: {}'.format(
             index, title, profile['name'], profile['age'], reason, reason_value))
 
-        if storetodict is not None:
-            storetodict.append({
-                'name': profile['name'],
-                'gender': profile['gender'],
-                'age': profile['age'],
-                'country': profile['country']
-            })
+        # if storetodict is not None:
+        #     storetodict.append({
+        #         'name': profile['name'],
+        #         'gender': profile['gender'],
+        #         'age': profile['age'],
+        #         'country': profile['country']
+        #     })
         index += 1
-    print storetodict
+    #print storetodict
 
 def filter_same_gender(user_profile, profiles):
     # this function filter same gender from profiles
@@ -178,3 +178,17 @@ def filter_in_acceptable_age_range(profiles, user_profile):
     # this function filters profiles not in acceptable range of logged user
     acceptable_country = user_profile['acceptable_country']
     return [p for p in profiles.values() if p['country'] in acceptable_country]
+
+
+# return users profile in list format for func 2,3,4
+def user_profile_to_list(users):
+    list_of_users = []
+    for user in users:
+        list_of_users.append({
+            'name': user['name'],
+            'gender': user['gender'],
+            'age': user['age'],
+            'country': user['country']
+        })
+
+    return list_of_users

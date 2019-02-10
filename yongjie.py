@@ -1,5 +1,5 @@
 import yongjiefuncs
-
+from fileparser import pretty_print
 
     # Function 1: List all the names, gender and age from all the profiles
 
@@ -19,18 +19,21 @@ def view_profiles(profiles):
     # country (e.g all the students that fall in to the acceptable country of
     # B should be printed out)
 
-def matched_by_countries(user_profile, profiles, storetodict):
+def matched_by_countries(user_profile, profiles):
     # Compare other user profile with the selected user acceptable country range
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     filtered_profiles = yongjiefuncs.filter_in_acceptable_age_range(filtered_profiles, user_profile)
     # reset dataframe from starting from index 1
     if not filtered_profiles:
         print("No Matched profile found")
-        raw_input("Enter any key to continue")
+        #raw_input("Enter any key to continue")
         return
-    yongjiefuncs.print_profile_lists(filtered_profiles, reason="country", storetodict = storetodict)
-    yongjiefuncs.eval(filtered_profiles)
-
+    #yongjiefuncs.print_profile_lists(filtered_profiles, reason="country")
+    #yongjiefuncs.eval(filtered_profiles)
+    # test =yongjiefuncs.user_profile_to_list(filtered_profiles)
+    # pretty_print(test)
+    #raw_input("Enter any key to continue")
+    return yongjiefuncs.user_profile_to_list(filtered_profiles)
 
 
     # Function 3: List the top 3 best matched students who share the most simliar
@@ -38,7 +41,7 @@ def matched_by_countries(user_profile, profiles, storetodict):
     # similarity metrics (e.g # of shared likes/dislikes etc ) in order to rank
     # their similarity
 
-def matched_likes(user_profile, profiles, storetodict):
+def matched_likes(user_profile, profiles):
     # filter by opp gender
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     # filter profile by acceptable age range
@@ -55,15 +58,18 @@ def matched_likes(user_profile, profiles, storetodict):
     #If user dosen't have any matched likes found then allow them to select other functions.
     #if no likes:
     if not likes:
-        print("No matched Likes found")
-        raw_input("Input any key to continue !")
+        #print("No matched Likes found")
+        #raw_input("Input any key to continue !")
         return
 
-    yongjiefuncs.print_profile_lists(likes, reason="likes", storetodict = storetodict)
-    yongjiefuncs.eval(likes)
+    #yongjiefuncs.print_profile_lists(likes, reason="likes")
+    #yongjiefuncs.eval(likes)
+    # test =yongjiefuncs.user_profile_to_list(likes)
+    # pretty_print(test)
+    return yongjiefuncs.user_profile_to_list(likes)
 
 
-def matched_dislikes(user_profile, profiles, storetodict):
+def matched_dislikes(user_profile, profiles):
     # filter by opp gender
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     # filter profile by acceptable age range
@@ -80,8 +86,11 @@ def matched_dislikes(user_profile, profiles, storetodict):
 
     # If user dosen't have any matched dislikes found then allow them to select other functions.
     if not dislikes:
-        print("No matching dislikes found")
-        raw_input("Enter any key to continue !")
+        #print("No matching dislikes found")
+        #raw_input("Enter any key to continue !")
         return
-    yongjiefuncs.print_profile_lists(dislikes, reason="dislikes", storetodict = storetodict)
-    yongjiefuncs.eval(dislikes)
+    # yongjiefuncs.print_profile_lists(dislikes, reason="dislikes")
+    # yongjiefuncs.eval(dislikes)
+    test =yongjiefuncs.user_profile_to_list(dislikes)
+    pretty_print(test)
+    return yongjiefuncs.user_profile_to_list(dislikes)
