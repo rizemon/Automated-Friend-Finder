@@ -39,7 +39,7 @@ if __name__ == "__main__":
     william.storeCSV()
 
     # Open function
-    kijoon.openFunction(profiles)
+    kijoon.viewDateSuggestions("Kevin",profiles)
 
 
 
