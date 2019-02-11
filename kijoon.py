@@ -1,7 +1,8 @@
-from nltk.corpus import wordnet as wn
-
 # This functions uses the top appearing interest between your matched profiles to return you date suggestions
-def viewDateSuggestions(name, profiles):
+def view_first_date_suggestions(name, profiles):
+    from nltk.corpus import wordnet as wn
+    from eventbrite import Eventbrite
+
     user_profile = profiles[name]
     # Placeholder results for top 3 overall profiles to get from ronghao function
     tempList = []
@@ -24,8 +25,6 @@ def viewDateSuggestions(name, profiles):
 
     #  The function documentTermMatrix returns the latent topics of the compiled interest, arranging the words according to their appearance as a list
     listOfMostSignificantTopic = documentTermMatrix(cleanedDocument)
-
-    from eventbrite import Eventbrite
 
     eventbrite = Eventbrite('2AFR6PPQRSQS62J2CLIK')
     # eventCategoriesDict stores all the eventbrite id references in a dictionary
@@ -94,7 +93,7 @@ def viewDateSuggestions(name, profiles):
     list_of_date_suggestions = [{"name": event["name"]["text"], "description": event["description"]["text"], "url": event["url"]} for event in eventbrite.get(path="/events/search/", data={"categories": category_id})["events"][:5]]
 
     print "The one of the ideal event type for your first date is: " + event_category_value
-    print "Here are some suggestions from EventBrite:"
+    print "Here are 5 suggestions from EventBrite:"
     # Prints out the list of best date suggestions
     # This is the final desired output
     print list_of_date_suggestions
