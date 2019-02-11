@@ -1,5 +1,4 @@
 from nltk.corpus import wordnet as wn
-import operator
 
 # This functions uses the top appearing interest between your matched profiles to return you date suggestions
 def viewDateSuggestions(name, profiles):
@@ -26,13 +25,9 @@ def viewDateSuggestions(name, profiles):
     #  The function documentTermMatrix returns the latent topics of the compiled interest, arranging the words according to their appearance as a list
     listOfMostSignificantTopic = documentTermMatrix(cleanedDocument)
 
-    # possible_synsets = wn.synsets("chicken")
-    # print possible_synsets
-
     from eventbrite import Eventbrite
+
     eventbrite = Eventbrite('2AFR6PPQRSQS62J2CLIK')
-    my_id = eventbrite.get_user()['id']
-    events = eventbrite.get_categories()
     # eventCategoriesDict stores all the eventbrite id references in a dictionary
     eventCategoriesDict = {"Music": "103", "Business": "101", "Food": "110", "Community": "113", "Arts": "105", "Film": "104", "Sports": "108", "Health": "107", "Science": "102", "Outdoor": "109", "Charity": "111", "Spirituality": "114", "Family": "115", "Holiday": "116", "Politics": "112", "Fashion": "106", "Lifestyle": "117", "Auto": "118", "Hobbies": "119", "Other": "119", "School": "120"}
 
@@ -70,52 +65,39 @@ def viewDateSuggestions(name, profiles):
             # for lemma in synset.lemmas():
             value.append(synset)
 
-    print synSetDict
-    print synSetDict2
     # Now we have to compare the similarity of all the synsets of both dictionaries
-    newdict ={}
+
+    similarity_percent_dict ={}
+    # This loops through all the values in syn_set_dict
     for key1, value1 in synSetDict.items():
         for index1 in value1:
             for key2, value2 in synSetDict2.items():
                 for index2 in value2:
-                    similarityPercent = wn.wup_similarity(index1, index2)
-                    newdict[key1+key2] = similarityPercent
+                    similarity_percent = wn.wup_similarity(index1, index2)
+                    similarity_percent_dict[key1+key2] = similarity_percent
 
-    print newdict
-    topMatching = max(newdict, key=newdict.get)
-    print topMatching
+    # top_matching_category is a string containing the best matched interest and corresponding event category(The one with the highest similarity percentage as it's value
+    # It is the best match between the latent interest of both users with one of the event categories
+    # Example values are: ethicScience, with ethic being the matched interest and Science being the corresponding event category
+    top_matching_category = max(similarity_percent_dict, key=similarity_percent_dict.get)
 
-    events = eventbrite.get_event(103)
-    print events
+    # Loops through all the values in eventCategoriesDict
+    for value in eventCategoriesDict:
+        # category_id stores the corresponding string category id of the category value that appears in top_matching_category
+        if value in top_matching_category:
+            category_id = (eventCategoriesDict[value])
+            event_category_value = value
 
-    # # allSynset1 stores all the synsets for all the words in eventCategoriesList
-    # allSynset1 = set(ss for word in eventCategoriesList for ss in wordnet.synsets(word))
-    #
-    # # allSynset2 stores all the synsets for all the words in given list 2
-    # allSynset2= set(ss for word in listOfMostSignificantTopicAlpha for ss in wordnet.synsets(word))
-    #
-    # print  allSynset2
-    # bestMatching = max((wordnet.wup_similarity(s1, s2) or 0, s1, s2) for s1, s2 in product(allSynset1, allSynset2))
-    # print(bestMatching)
+    # list_of_date_suggestions is a list containing the first 5 events that matches eventCategoryID found to be most suitable for this couple
+    # Each event is stored in a dictionary with the keys being "url", "name" and "description"
+    # Example output would be: [{"url": "https://www.eventbrite.com", "name": "DeveloperWeek 2019", "description": "blah blah"},{...},{...},{...},{...}]
+    list_of_date_suggestions = [{"name": event["name"]["text"], "description": event["description"]["text"], "url": event["url"]} for event in eventbrite.get(path="/events/search/", data={"categories": category_id})["events"][:5]]
 
-
-
-    # for index in tempList:
-    #     for key, value in index.items():
-    #         matchedInterest[key == "name"] = documentPreparation(index)
-
-    # for index in combinedInterest:
-    #     documentTermMatrix(index)
-
-    # Loops through the list containing the top 3 matched profiles
-    # for index in tempList:
-
-    # cleanedDocuments stores the list of cleaned values in a list
-    # cleanedDocuments =[]
-    # for index in documentPreparation(user_profile):
-    #     cleanedDocuments.append(documentPreprocessing(index))
-    # for index in cleanedDocuments:
-    #     documentTermMatrix(index)
+    print "The one of the ideal event type for your first date is: " + event_category_value
+    print "Here are some suggestions from EventBrite:"
+    # Prints out the list of best date suggestions
+    # This is the final desired output
+    print list_of_date_suggestions
 
 # Returns the likes and favourite books of the profile given as interest
 def documentPreparation(profile):
@@ -157,7 +139,6 @@ def documentTermMatrix(cleanedDocument):
     # Assigns a unique token to each unique term
     # Dictionary(5 unique tokens: [u'chop', u'chicken', u'garlic', u'durain', u'swimming'])
     dictionary = corpora.Dictionary(cleanedDocument)
-    print dictionary
 
     # Converts the text-based corpus into a matrix representation
     # dictionary.doc2bow converts the document into a list of token_id(I.E Unique tokens) and token_count tuples
@@ -170,7 +151,7 @@ def documentTermMatrix(cleanedDocument):
     ldamodel = ldaObject(matrixRepresentation, num_topics=5, id2word= dictionary, passes= 100)
 
     # Returns all the most significant topics, arranging the topics and words by significance
-    return ldamodel.print_topics(num_topics=-1, num_words=1)
+    return ldamodel.print_topics(num_topics=-5, num_words=1)
 
 
 
