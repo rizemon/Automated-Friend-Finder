@@ -1,3 +1,4 @@
+from ronghao import viewMatchesOverall
 from nltk.corpus import wordnet as wn
 from eventbrite import Eventbrite
 from nltk.corpus import stopwords
@@ -6,28 +7,34 @@ import string
 import gensim
 from gensim import corpora
 
+
 # This functions uses the top appearing interest between your matched profiles to return you date suggestions
 def view_first_date_suggestions(name, profiles):
-
     user_profile = profiles[name]
-    # Ronghao's list
+
+    # Below is placeholder for top 3 overall profiles from ronghao function
     top_3_profile = []
-    # Placeholder results for top 3 overall profiles to get from ronghao function
-    tempList = []
-    tempList.append(profiles)
-    # tempList.append(profiles["Kevin"])
-    # tempList.append(profiles["Micheal Jackson"])
+    name_list = ["Kevin", "Teresa", "Shelley"]
+    for name in name_list:
+        top_3_profile.append(profiles[name])
+    for i, d in enumerate(top_3_profile):
+        d['name'] = name_list[i]
+    # Replace with below
+    # top_3_profile = viewMatchesOverall(profiles, name)
+    print top_3_profile
 
-    # for dict in top_3_profile:
+    # Loops through the indexes of the list in order to parse each matching profile into matching_interest_compiler
+    for index, value in enumerate(top_3_profile):
+        matching_interest_compiler(user_profile, top_3_profile[index])
 
-    choice = raw_input("Enter one of the top 3 profiles you have matched against: ")
 
-    # Compile likes and favourite books of the current profile AND each of the top 3 matched profile into a corpus
+# Compile likes and favourite books of the current profile AND each of the top 3 matched profile into a corpus
+def matching_interest_compiler(current_profile, matching_profile):
 
     # currentInterest stores the interests(Both likes and favourite books) of the current profile as a list
-    currentInterest = documentPreparation(user_profile)
+    currentInterest = documentPreparation(current_profile)
     # matchedInterest stores the interests(Both likes and favourite books) of the matching profile as a list
-    matchedInterest = documentPreparation(profiles[choice])
+    matchedInterest = documentPreparation(matching_profile)
 
     # combinedInterest stores a list of string values containing the compiled interest of the current profile and matched interest
     combinedInterest = currentInterest + matchedInterest
@@ -104,6 +111,7 @@ def view_first_date_suggestions(name, profiles):
     # Example output would be: [{"url": "https://www.eventbrite.com", "name": "DeveloperWeek 2019", "description": "blah blah"},{...},{...},{...},{...}]
     list_of_date_suggestions = [{"name": event["name"]["text"], "description": event["description"]["text"], "url": event["url"]} for event in eventbrite.get(path="/events/search/", data={"categories": category_id})["events"][:5]]
 
+    print "For the matched profile: " + matching_profile["name"]
     print "The one of the ideal event type for your first date is: " + event_category_value
     print "Here are 5 suggestions from EventBrite:"
     # Prints out the list of best date suggestions
@@ -137,6 +145,7 @@ def documentPreprocessing(corpus):
 
     cleanedDocument = [documentCleaning(doc).split() for doc in corpus]
     return cleanedDocument
+
 
 #This functions is La
 def documentTermMatrix(cleanedDocument):
