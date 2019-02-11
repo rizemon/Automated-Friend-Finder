@@ -1,3 +1,8 @@
 .idea
 path.txt
+<<<<<<< HEAD
 *.pyc
+=======
+*.pyc
+output
+>>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
