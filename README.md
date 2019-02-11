@@ -4,7 +4,6 @@ Python project for ICT1002
 
 ### Prerequisites
 
-<<<<<<< videoDemo
 1. Install the necessary Python 2 packages
 ```
 pip install -r requirements.txt
@@ -20,10 +19,6 @@ cd "Automated Friend Finder"
 ``` 
 python main.py
 ```
-=======
-To be able to run this all you need is your Python IDE.
-
->>>>>>> Revert "Merge pull request #1 from rizemon/ImportCsvV2"
 ## Built With
 
 * Python IDE LOL

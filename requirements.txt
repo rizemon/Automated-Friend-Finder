@@ -1,4 +1,3 @@
-<<<<<<< videoDemo
 backports.functools-lru-cache==1.5
 boto==2.49.0
 boto3==1.9.96
@@ -34,5 +33,3 @@ six==1.12.0
 smart-open==1.8.0
 urllib3==1.24.1
 Werkzeug==0.14.1
-=======
->>>>>>> Revert "Merge pull request #1 from rizemon/ImportCsvV2"
