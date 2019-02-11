@@ -8,7 +8,7 @@ import gensim
 from gensim import corpora
 
 
-# This functions uses the top appearing interest between your matched profiles to return you date suggestions
+# This function parses in your current profile and each matching profile into matching_interest_compiler
 def view_first_date_suggestions(name, profiles):
     user_profile = profiles[name]
 
@@ -19,9 +19,9 @@ def view_first_date_suggestions(name, profiles):
         top_3_profile.append(profiles[name])
     for i, d in enumerate(top_3_profile):
         d['name'] = name_list[i]
-    # Replace with below
+    # Replace this block with line below when merging with ronghao
+
     # top_3_profile = viewMatchesOverall(profiles, name)
-    print top_3_profile
 
     # Loops through the indexes of the list in order to parse each matching profile into matching_interest_compiler
     for index, value in enumerate(top_3_profile):
@@ -29,6 +29,7 @@ def view_first_date_suggestions(name, profiles):
 
 
 # Compile likes and favourite books of the current profile AND each of the top 3 matched profile into a corpus
+# It uses the top appearing interest between your matched profiles to return you date suggestions
 def matching_interest_compiler(current_profile, matching_profile):
 
     # currentInterest stores the interests(Both likes and favourite books) of the current profile as a list
@@ -118,10 +119,12 @@ def matching_interest_compiler(current_profile, matching_profile):
     # This is the final desired output
     print list_of_date_suggestions
 
+
 # Returns the likes and favourite books of the profile given as interest
 def documentPreparation(profile):
     interest = profile['likes'] + profile['books']
     return interest
+
 
 def documentPreprocessing(corpus):
     # Cleaning and preprocessing
@@ -162,7 +165,7 @@ def documentTermMatrix(cleanedDocument):
 
     # To determine optimal amount of topics for a dataset like ours, i chose 5
     # http://www.rpubs.com/MNidhi/NumberoftopicsLDA
-    ldamodel = ldaObject(matrixRepresentation, num_topics=5, id2word= dictionary, passes= 100)
+    ldamodel = ldaObject(matrixRepresentation, num_topics=5, id2word=dictionary, passes=200)
 
     # Returns all the most significant topics, arranging the topics and words by significance
     return ldamodel.print_topics(num_topics=5, num_words=1)
