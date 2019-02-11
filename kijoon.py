@@ -18,7 +18,7 @@ def view_first_date_suggestions(name, profiles):
     # tempList.append(profiles["Kevin"])
     # tempList.append(profiles["Micheal Jackson"])
 
-    for dict in top_3_profile:
+    # for dict in top_3_profile:
 
     choice = raw_input("Enter one of the top 3 profiles you have matched against: ")
 
