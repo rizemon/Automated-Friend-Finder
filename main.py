@@ -11,7 +11,12 @@ import yongjie
 import ronghao
 import kijoon
 import jiale
+<<<<<<< HEAD
 import matchexport
+=======
+import william
+import piechart
+>>>>>>> parent of 2d26a13... Created a new branch for a new function
 
 
 # Initialize Flask application
