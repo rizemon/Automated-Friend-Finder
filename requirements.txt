@@ -1,0 +1,4 @@
+eventbrite==3.3.3
+gensim==3.7.1
+nltk==3.4
+oauthlib==3.0.1

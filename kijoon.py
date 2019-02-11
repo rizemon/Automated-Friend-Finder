@@ -1,7 +1,13 @@
+from nltk.corpus import wordnet as wn
+from eventbrite import Eventbrite
+from nltk.corpus import stopwords
+from nltk.stem.wordnet import WordNetLemmatizer
+import string
+import gensim
+from gensim import corpora
+
 # This functions uses the top appearing interest between your matched profiles to return you date suggestions
 def view_first_date_suggestions(name, profiles):
-    from nltk.corpus import wordnet as wn
-    from eventbrite import Eventbrite
 
     user_profile = profiles[name]
     # Placeholder results for top 3 overall profiles to get from ronghao function
@@ -10,6 +16,7 @@ def view_first_date_suggestions(name, profiles):
     tempList.append(profiles["Kevin"])
     tempList.append(profiles["Joel Jackson"])
 
+    print tempList
     # Compile likes and favourite books of the current profile AND each of the top 3 matched profile into a corpus
 
     # currentInterest stores the interests(Both likes and favourite books) of the current profile as a list
@@ -106,9 +113,6 @@ def documentPreparation(profile):
 
 def documentPreprocessing(corpus):
     # Cleaning and preprocessing
-    from nltk.corpus import stopwords
-    from nltk.stem.wordnet import WordNetLemmatizer
-    import string
 
     # Places known natural language stopwords such as "a","the" into a set
     stop = set(stopwords.words('english'))
@@ -132,8 +136,6 @@ def documentPreprocessing(corpus):
 
 #This functions is La
 def documentTermMatrix(cleanedDocument):
-    import gensim
-    from gensim import corpora
 
     # Assigns a unique token to each unique term
     # Dictionary(5 unique tokens: [u'chop', u'chicken', u'garlic', u'durain', u'swimming'])
