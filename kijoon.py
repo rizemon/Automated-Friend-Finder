@@ -150,7 +150,7 @@ def documentTermMatrix(cleanedDocument):
     ldamodel = ldaObject(matrixRepresentation, num_topics=5, id2word= dictionary, passes= 100)
 
     # Returns all the most significant topics, arranging the topics and words by significance
-    return ldamodel.print_topics(num_topics=-5, num_words=1)
+    return ldamodel.print_topics(num_topics=5, num_words=1)
 
 
 
