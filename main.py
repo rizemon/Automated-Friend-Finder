@@ -1,24 +1,16 @@
 from fileparser import pretty_print
 import getfilepath
-<<<<<<< HEAD
-from os.path import isdir
-from sys import exit
-=======
 import piechart
 
 from os.path import isdir, abspath
 from sys import exit
 from flask import Flask, jsonify, Response, request, send_from_directory
 from flask_cors import CORS
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
 import yongjie
 import ronghao
 import kijoon
 import jiale
-<<<<<<< HEAD
-import william
-=======
 import matchexport
 
 
@@ -115,7 +107,6 @@ def saveCSV():
     # Output the absolute path of where .csv are stored
     return jsonify({"message": directory})
 
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
 if __name__ == "__main__":
     # Get directory of profiles
@@ -130,11 +121,7 @@ if __name__ == "__main__":
     # Read the profiles and store in profiles dictionary
     profiles = getfilepath.getProfiles(directory)
     # For debugging purposes
-<<<<<<< HEAD
-    pretty_print(profiles)
-=======
     # pretty_print(profiles)
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
     # Function 1,2,3 (Based on Project 1 Description.pdf)
     yongjie.viewProfiles(profiles)
@@ -142,15 +129,6 @@ if __name__ == "__main__":
     yongjie.viewMatchesLikesDislikes(profiles)
 
     # Function 4
-<<<<<<< HEAD
-    jiale.viewMatchesBooks(profiles)
-
-    # Function 5
-    ronghao.viewMatchesOverall(profiles)
-
-    # Function 6
-    william.storeCSV()
-=======
     matches_books = jiale.getMatchesBooks(profiles)
 
     # Pre-compute all pie charts
@@ -158,21 +136,11 @@ if __name__ == "__main__":
     piecharts["dislikes"] = piechart.display_data_dislikes(profiles)
     piecharts["country"] = piechart.display_data_nationality(profiles)
     piecharts["age"] = piechart.display_data_age(profiles)
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
     # Open function
     kijoon.openFunction(profiles)
 
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
     # Start Flask application on port 80 for loopback interface
     app.run(host="127.0.0.1", port=80, threaded=True)
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
 

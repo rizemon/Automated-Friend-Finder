@@ -5,12 +5,8 @@ import fileparser
 
 def getProfiles(fileDirec):
 
-<<<<<<< HEAD
-    # Takes in the directory path, read the profiles in them and return all the profiles
-=======
     # Takes in the directory path, read the profiles in them and
     # return all the profiles
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
 
     profiles = {}
     files = listdir(fileDirec)
@@ -35,19 +31,9 @@ def getFilePath():
     except IOError:
         f = open("path.txt", 'w')
         print "Path to profiles not set yet."
-<<<<<<< HEAD
-        pathDirec = raw_input(
-            "File directory has not been set up yet, please choose the folder with profile data:")
-=======
         pathDirec = raw_input('File directory has not been set up yet,'\
             'please choose the folder with profile data:')
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
         print "File path set to: %s" % pathDirec
         f.write(pathDirec)
         f.close()
     return pathDirec
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0

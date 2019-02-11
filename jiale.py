@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-def viewMatchesBooks(profiles):
-    # Function 4: ...
-    pass # Delete this after putting your code
-=======
 # Set the directory of the nltk data
 from nltk.data import path
 path.insert(0, ".\\nltk_data")
@@ -98,4 +93,3 @@ def getMatchesBooks(profiles):
                     matches[partner_name][name] = matches[name][partner_name]
 
     return matches
->>>>>>> 5398629a56f1780be80f1783f39953654aef11a0
