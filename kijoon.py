@@ -140,13 +140,13 @@ def documentPreprocessing(corpus):
     lemma = WordNetLemmatizer()
 
     # Cleans each list item in the the given text(corpus)
-    def documentCleaning(doc):
+    def document_cleaning(doc):
         stop_free = " ".join([i for i in doc.lower().split() if i not in stop])
         punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
         normalized = " ".join(lemma.lemmatize(word) for word in punc_free.split())
         return normalized
 
-    cleanedDocument = [documentCleaning(doc).split() for doc in corpus]
+    cleanedDocument = [document_cleaning(doc).split() for doc in corpus]
     return cleanedDocument
 
 
