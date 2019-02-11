@@ -5,8 +5,7 @@ import fileparser
 
 def getProfiles(fileDirec):
 
-    # Takes in the directory path, read the profiles in them and
-    # return all the profiles
+    # Takes in the directory path, read the profiles in them and return all the profiles
 
     profiles = {}
     files = listdir(fileDirec)
@@ -31,9 +30,16 @@ def getFilePath():
     except IOError:
         f = open("path.txt", 'w')
         print "Path to profiles not set yet."
+<<<<<<< videoDemo
         pathDirec = raw_input('File directory has not been set up yet,,'\
             'please enter the folder name with profiles data:')
+=======
+        pathDirec = raw_input(
+            "File directory has not been set up yet, please choose the folder with profile data:")
+>>>>>>> Revert "Merge pull request #1 from rizemon/ImportCsvV2"
         print "File path set to: %s" % pathDirec
         f.write(pathDirec)
         f.close()
     return pathDirec
+
+

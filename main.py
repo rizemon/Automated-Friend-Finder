@@ -14,7 +14,11 @@ import yongjie
 import ronghao
 import kijoon
 import jiale
+<<<<<<< videoDemo
 import matchexport
+=======
+import william
+>>>>>>> Revert "Merge pull request #1 from rizemon/ImportCsvV2"
 
 
 # Initialize Flask application
@@ -222,3 +226,17 @@ if __name__ == "__main__":
     # Start Flask application on port 80 for loopback interface
     app.run(host="127.0.0.1", port=80, threaded=True)
 
+<<<<<<< videoDemo
+=======
+    # Open function
+    kijoon.openFunction(profiles)
+
+
+
+
+
+
+
+
+
+>>>>>>> Revert "Merge pull request #1 from rizemon/ImportCsvV2"
