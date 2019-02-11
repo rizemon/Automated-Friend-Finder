@@ -16,6 +16,7 @@ import matchexport
 =======
 import william
 import piechart
+<<<<<<< HEAD
 >>>>>>> parent of 2d26a13... Created a new branch for a new function
 
 
@@ -112,6 +113,8 @@ def saveCSV():
     # Output the absolute path of where .csv are stored
     return jsonify({"message": directory})
 
+=======
+>>>>>>> parent of 2d26a13... Created a new branch for a new function
 
 if __name__ == "__main__":
     # Get directory of profiles
