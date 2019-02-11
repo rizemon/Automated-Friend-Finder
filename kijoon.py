@@ -10,19 +10,24 @@ from gensim import corpora
 def view_first_date_suggestions(name, profiles):
 
     user_profile = profiles[name]
+    # Ronghao's list
+    top_3_profile = []
     # Placeholder results for top 3 overall profiles to get from ronghao function
     tempList = []
-    tempList.append(profiles["Joel Jackson"])
-    tempList.append(profiles["Kevin"])
-    tempList.append(profiles["Joel Jackson"])
+    tempList.append(profiles)
+    # tempList.append(profiles["Kevin"])
+    # tempList.append(profiles["Micheal Jackson"])
 
-    print tempList
+    for dict in top_3_profile:
+
+    choice = raw_input("Enter one of the top 3 profiles you have matched against: ")
+
     # Compile likes and favourite books of the current profile AND each of the top 3 matched profile into a corpus
 
     # currentInterest stores the interests(Both likes and favourite books) of the current profile as a list
     currentInterest = documentPreparation(user_profile)
     # matchedInterest stores the interests(Both likes and favourite books) of the matching profile as a list
-    matchedInterest = documentPreparation(profiles["Joel Jackson"])
+    matchedInterest = documentPreparation(profiles[choice])
 
     # combinedInterest stores a list of string values containing the compiled interest of the current profile and matched interest
     combinedInterest = currentInterest + matchedInterest
@@ -109,7 +114,6 @@ def view_first_date_suggestions(name, profiles):
 def documentPreparation(profile):
     interest = profile['likes'] + profile['books']
     return interest
-
 
 def documentPreprocessing(corpus):
     # Cleaning and preprocessing
