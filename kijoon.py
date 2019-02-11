@@ -12,16 +12,17 @@ from gensim import corpora
 def view_first_date_suggestions(name, profiles):
     user_profile = profiles[name]
 
-    # Below is placeholder for top 3 overall profiles from ronghao function
+    name_list = []
+    top_3_profile_without_interest = viewMatchesOverall(profiles, name)
+
+    for index, value in enumerate(top_3_profile_without_interest):
+        name_list.append(value["name"])
+
     top_3_profile = []
-    name_list = ["Kevin", "Teresa", "Shelley"]
     for name in name_list:
         top_3_profile.append(profiles[name])
     for i, d in enumerate(top_3_profile):
         d['name'] = name_list[i]
-    # Replace this block with line below when merging with ronghao
-
-    # top_3_profile = viewMatchesOverall(profiles, name)
 
     # Loops through the indexes of the list in order to parse each matching profile into matching_interest_compiler
     for index, value in enumerate(top_3_profile):
