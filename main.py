@@ -102,9 +102,13 @@ def saveCSV():
     # Retrieve JSON body
     req = request.get_json()
     current_profile = req.get("current_profile")
-    # Export each list of best matches to .csv
-    for field in ["likes", "books", "overall"]:
-        matchexport.export_matches(current_profile, field, getMatches(current_profile, field), directory)
+    bestmatches_all = [getMatches(current_profile, field) for field in ["likes", "books", "overall"]]
+    titles = [
+        "Top 3 best match by likes",
+        "Top 3 best match by books read",
+        "Top 3 best match by overall profile information"
+    ]
+    matchexport.export_matches(current_profile, titles, bestmatches_all, directory)
     # Output the absolute path of where .csv are stored
     return jsonify({"message": directory})
 
