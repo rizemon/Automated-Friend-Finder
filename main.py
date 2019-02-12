@@ -3,6 +3,7 @@ import getfilepath
 import piechart
 
 from os.path import isdir, abspath
+from os import remove
 from sys import exit
 from flask import Flask, jsonify, Response, request, send_from_directory
 from flask_cors import CORS
@@ -110,12 +111,16 @@ def saveCSV():
 
 if __name__ == "__main__":
     # Get directory of profiles
-    directory = getfilepath.getFilePath()
+    directory = ""
+    while True:
+        directory = getfilepath.getFilePath()
+        if not isdir(directory):
+            print "Folder does not exist."
+            remove("path.txt")
+        else:
+            break
 
-    # If directory does not exist, exit the program
-    if not isdir(directory):
-        print "Invalid directory!"
-        exit(0)
+
     print "Reading profiles from %s now..." % directory
 
     # Read the profiles and store in profiles dictionary
