@@ -24,13 +24,15 @@ def read_profiles():
 
     # Read the profiles and store in profiles dictionary
     profiles = getfilepath.getProfiles(directory)
+    # convert keys to lowercase e.g Joel Jackson -> joel jackson
+    profiles = {k.lower(): v for k, v in profiles.iteritems()}
     # For debugging purposes
     # pretty_print(profiles)
     return profiles
 
 
     # Function 1,2,3 (Based on Project 1 Description.pdf)
-def selected_user_menu(user_profile, profiles):
+#def selected_user_menu(user_profile, profiles):
     #  show menu after user selected the profiles.
     # except for logged in user profile wont be visable in the options.
     while True:
@@ -65,22 +67,38 @@ def selected_user_menu(user_profile, profiles):
 
 def menu():
     # Main function to start the application.
-    while True:
-        print("1- Select A User As\n")
-        print("2- Register \n")
-        menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
-        if menu_number == 0:
-            raw_input("Enter any key to quit!!")
-            return
-        elif menu_number == 1:
-            profiles = read_profiles()
-            user_profile = calluser.select_user(profiles)
-            storetodict = selected_user_menu(user_profile=user_profile, profiles=profiles)
-        elif menu_number == 2:
-            calluser.add_new_user()
-        else:
-            print("please enter again")
-        clear_shell()
+    profiles = read_profiles()
+    #List all user view based on 'Michael Jackson'
+    #print yongjie.view_profiles(profiles)
+    ###
+    #List Country for profile 'Michael Jackson'
+    #print yongjie.matched_by_countries('Michael Jackson', profiles)
+    ###
+    #List of likes for profile 'Michael jackson'
+    #print yongjie.matched_likes('Michael Jackson', profiles)
+    ###
+    #List of dislikes for profile 'Michael jackson'
+    #print yongjie.matched_dislikes('Michael Jackson', profiles)
+    ###
+    ##
+    #
+    #while True:
+        # print("1- Select A User As\n")
+        # print("2- Register \n")
+        # menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
+        # if menu_number == 0:
+        #     raw_input("Enter any key to quit!!")
+        #     return
+        # elif menu_number == 1:
+        #     # profiles = read_profiles()
+        #     # print yongjie.matched_by_countries('Michael Jackson', profiles)
+        #     # user_profile = calluser.select_user(profiles)
+        #     # storetodict = selected_user_menu(user_profile=user_profile, profiles=profiles)
+        # elif menu_number == 2:
+        #     calluser.add_new_user()
+        # else:
+        #     print("please enter again")
+        # clear_shell()
 
     # Function 4
     jiale.viewMatchesBooks(profiles)

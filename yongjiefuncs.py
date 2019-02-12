@@ -1,5 +1,5 @@
 # this file has all utility function to use and reuse in project
-
+from json import dumps
 
 def format_str(to_format_str):
     # remove unwanted spaces e.g input 'jackson ' output 'jackson'
@@ -192,3 +192,16 @@ def user_profile_to_list(users):
         })
 
     return list_of_users
+
+def get_profile_by_name(username, profiles):
+    user_profile = profiles.get(username.lower(), None)
+    if not user_profile:
+        raw_input("Error! No user found with username {}".format(username))
+        return
+    return user_profile
+
+def pretty_print_yj(dictionary):
+    # Pretty prints a dictionary
+
+    results_dict = dumps(dictionary, sort_keys=False, indent=4)
+    return results_dict
