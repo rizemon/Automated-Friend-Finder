@@ -7,7 +7,6 @@ def view_profiles (profiles):
     for row in profiles.values():
         title = yongjiefuncs.person_title(row['gender'])
         full_gender = yongjiefuncs.full_gender(row['gender'])
-    #yongjiefuncs.eval(profiles.values())
     all_profile_output = yongjiefuncs.user_profile_to_list(profiles.values())
     return all_profile_output
 
@@ -26,9 +25,7 @@ def matched_by_countries(username, profiles):
     filtered_profiles = yongjiefuncs.filter_in_acceptable_age_range(filtered_profiles, user_profile)
     # reset dataframe from starting from index 1
     if not filtered_profiles:
-        print("No Matched profile found")
-        #raw_input("Enter any key to continue")
-        return
+        return []
     output_country = yongjiefuncs.user_profile_to_list(filtered_profiles)
     #return yongjiefuncs.user_profile_to_list(filtered_profiles)
     return output_country
@@ -58,9 +55,7 @@ def matched_likes(username, profiles):
 
     #If user dosen't have any matched likes found then allow them to select other functions.
     if not likes:
-        print("No matched Likes found")
-        raw_input("Input any key to continue !")
-        return
+        return []
 
     output_likes =yongjiefuncs.user_profile_to_list(likes)
     # pretty_print(test)
@@ -71,7 +66,7 @@ def matched_dislikes(username, profiles):
     # filter by opp gender
     user_profile = yongjiefuncs.get_profile_by_name(profiles=profiles, username=username)
     if not user_profile:
-        return
+        return []
 
     filtered_profiles = yongjiefuncs.filter_same_gender(profiles=profiles, user_profile=user_profile)
     # filter profile by acceptable age range
@@ -88,9 +83,7 @@ def matched_dislikes(username, profiles):
 
     # If user dosen't have any matched dislikes found then allow them to select other functions.
     if not dislikes:
-        #print("No matching dislikes found")
-        #raw_input("Enter any key to continue !")
-        return
+        return []
     # yongjiefuncs.print_profile_lists(dislikes, reason="dislikes")
     # yongjiefuncs.eval(dislikes)
     output_dislikes =yongjiefuncs.user_profile_to_list(dislikes)
