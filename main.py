@@ -45,6 +45,49 @@ def getMatches(profile_name, field):
     elif field == "overall":
         # Retrieve best matches by overall information
         result = ronghao.viewMatchesOverall(profiles, profile_name)
+    elif field == "suggestion":
+        result = ronghao.viewMatchesOverall(profiles, profile_name)
+
+        result[0]["eventCategory"] = "Music"
+        result[1]["eventCategory"] = "Business"
+        result[2]["eventCategory"] = "Food"
+
+        result[0]["listOfEvents"] = [
+            {"name": "FREE ADMISSION SATURDAY NIGHT PARTY  | THE VNYL  VINTAGE LIFESTYLE",
+             "url": "https://www.eventbrite.com/e/free-admission-saturday-night-party-the-vnyl-vintage-lifestyle-tickets-17434703668?aff=ebapi"},
+            {"name": "Big Tigger Hosts Suite Life Fridays At Suite Lounge - RSVP HERE",
+             "url": "https://www.eventbrite.com/e/big-tigger-hosts-suite-life-fridays-at-suite-lounge-rsvp-here-tickets-53667810867?aff=ebapi"},
+            {"name": "Suite Life Fridays Hosted By Big Tigger At Suite Lounge - RSVP HERE",
+             "url": "https://www.eventbrite.com/e/suite-life-fridays-hosted-by-big-tigger-at-suite-lounge-rsvp-here-tickets-22601901897?aff=ebapi"},
+            {"name": "ATLANTA'S NEWEST CLUB - REVEL OF WEST MIDTOWN",
+             "url": "https://www.eventbrite.com/e/atlantas-newest-club-revel-of-west-midtown-tickets-34595163064?aff=ebapi"},
+            {"name": "9th Annual Atlanta Hip Hop Day Festival",
+             "url": "https://www.eventbrite.com/e/9th-annual-atlanta-hip-hop-day-festival-tickets-1880852681?aff=ebapi"}
+        ]
+        result[1]["listOfEvents"] = [
+            {"name": "8th Philippine SME Business Expo & Conference 2019",
+             "url": "https://www.eventbrite.com/e/8th-philippine-sme-business-expo-conference-2019-tickets-26676413872?aff=ebapi"},
+            {"name": "RISE Weekend Dallas - July 18-20, 2019",
+             "url": "https://www.eventbrite.com/e/rise-weekend-dallas-july-18-20-2019-tickets-54883442855?aff=ebapi"},
+            {"name": "DrinkEntrepreneurs x Elbow Room by Drinks & Co 20 Feb",
+             "url": "https://www.eventbrite.com/e/drinkentrepreneurs-x-elbow-room-by-drinks-co-20-feb-tickets-5339893766?aff=ebapi"},
+            {"name": "6th Entrepreneur and Franchise Expo 2019",
+             "url": "https://www.eventbrite.com/e/6th-entrepreneur-and-franchise-expo-2019-tickets-37795845391?aff=ebapi"},
+            {"name": "INTERNET WORLD EXPO 2019 \u2013 the commerce e-xperience",
+             "url": "https://www.eventbrite.de/e/internet-world-expo-2019-the-commerce-e-xperience-tickets-43928336838?aff=ebapi"}
+        ]
+        result[2]["listOfEvents"] = [
+            {"name": "Chicago Food Truck Festival (Summer 2019)",
+             "url": "https://www.eventbrite.com/e/chicago-food-truck-festival-summer-2019-tickets-54158401236?aff=ebapi"},
+            {"name": "HENNY&WAFFLES CHARLOTTE | ALL STAR WEEKEND | FEB 17 | OAK ROOM",
+             "url": "https://www.eventbrite.com/e/hennywaffles-charlotte-all-star-weekend-feb-17-oak-room-tickets-52417953510?aff=ebapi"},
+            {"name": "Heights Crawfish Festival - OFFICAL",
+             "url": "https://www.eventbrite.com/e/heights-crawfish-festival-offical-tickets-52206929331?aff=ebapi"},
+            {"name": "Food & Wine Experience",
+             "url": "https://www.eventbrite.com/e/food-wine-experience-tickets-44432192885?aff=ebapi"},
+            {"name": "Black Food Truck Fridays (Special Edition)",
+             "url": "https://www.eventbrite.com/e/black-food-truck-fridays-special-edition-tickets-54689941086?aff=ebapi"}
+        ]
 
     return result
 
@@ -114,6 +157,7 @@ def saveCSV():
     matchexport.export_matches(current_profile, titles, bestmatches_all, directory)
     # Output the absolute path of where .csv are stored
     return jsonify({"message": directory})
+
 
 
 if __name__ == "__main__":
