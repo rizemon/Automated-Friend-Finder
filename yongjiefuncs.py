@@ -194,7 +194,7 @@ def user_profile_to_list(users):
     return list_of_users
 
 def get_profile_by_name(username, profiles):
-    user_profile = profiles.get(username.lower(), None)
+    user_profile = profiles.get(username, None)
     if not user_profile:
         raw_input("Error! No user found with username {}".format(username))
         return

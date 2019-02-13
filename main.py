@@ -25,54 +25,57 @@ def read_profiles():
     # Read the profiles and store in profiles dictionary
     profiles = getfilepath.getProfiles(directory)
     # convert keys to lowercase e.g Joel Jackson -> joel jackson
-    profiles = {k.lower(): v for k, v in profiles.iteritems()}
+    #profiles = {k.lower(): v for k, v in profiles.iteritems()}
     # For debugging purposes
     # pretty_print(profiles)
+
     return profiles
 
+# profiles = read_profiles()
+# print yongjie.view_profiles(profiles)
 
     # Function 1,2,3 (Based on Project 1 Description.pdf)
 #def selected_user_menu(user_profile, profiles):
     #  show menu after user selected the profiles.
     # except for logged in user profile wont be visable in the options.
-    while True:
-        clear_shell()
-        print("1- View all profile\n")
-        print("2- View  profiles by countries \n")
-        print("3- View profiles by likes \n")
-        print("4- View profiles by dislikes\n")
-        print("0- Logout")
-
-        menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
-
-        if menu_number == 0:
-            # return to previous state when 0 is selected
-            # print data that is stored in dict
-            return
-        elif menu_number == 1:
-            yongjie.view_profiles(profiles)
-        elif menu_number == 2:
-            # matched_counties has matching profiles
-            matched_countries = yongjie.matched_by_countries(
-                user_profile=user_profile, profiles=profiles
-            )
-        elif menu_number == 3:
-            matched_likes = yongjie.matched_likes(
-                user_profile=user_profile, profiles=profiles
-            )
-        elif menu_number == 4:
-            matched_dislikes = yongjie.matched_dislikes(
-                user_profile=user_profile, profiles=profiles
-            )
+    # while True:
+    #     clear_shell()
+    #     print("1- View all profile\n")
+    #     print("2- View  profiles by countries \n")
+    #     print("3- View profiles by likes \n")
+    #     print("4- View profiles by dislikes\n")
+    #     print("0- Logout")
+    #
+    #     menu_number = integer_input("Enter menu number e.g 1 from menu 0 to quit")
+    #
+    #     if menu_number == 0:
+    #         # return to previous state when 0 is selected
+    #         # print data that is stored in dict
+    #         return
+    #     elif menu_number == 1:
+    #         yongjie.view_profiles(profiles)
+    #     elif menu_number == 2:
+    #         # matched_counties has matching profiles
+    #         matched_countries = yongjie.matched_by_countries(
+    #             user_profile=user_profile, profiles=profiles
+    #         )
+    #     elif menu_number == 3:
+    #         matched_likes = yongjie.matched_likes(
+    #             user_profile=user_profile, profiles=profiles
+    #         )
+    #     elif menu_number == 4:
+    #         matched_dislikes = yongjie.matched_dislikes(
+    #             user_profile=user_profile, profiles=profiles
+    #         )
 
 def menu():
     # Main function to start the application.
-    profiles = read_profiles()
+    #profiles = read_profiles()
     #List all user view based on 'Michael Jackson'
     #print yongjie.view_profiles(profiles)
     ###
     #List Country for profile 'Michael Jackson'
-    #print yongjie.matched_by_countries('Michael Jackson', profiles)
+    #print yongjie.matched_by_countries('Carol', profiles)
     ###
     #List of likes for profile 'Michael jackson'
     #print yongjie.matched_likes('Michael Jackson', profiles)

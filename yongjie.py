@@ -4,18 +4,9 @@ from yongjiefuncs import pretty_print_yj
     # Function 1: List all the names, gender and age from all the profiles
 
 def view_profiles (profiles):
-    user_profile = yongjiefuncs.get_profile_by_name(username=username, profiles=profiles)
-    if not user_profile:
-        return
-
-    index = 1
     for row in profiles.values():
         title = yongjiefuncs.person_title(row['gender'])
         full_gender = yongjiefuncs.full_gender(row['gender'])
-        # print('{}. {} {}, Gender: {}, Age {}'.format(
-        #     index, title, row['name'], full_gender, row['age']
-        #))
-        index += 1
     #yongjiefuncs.eval(profiles.values())
     all_profile_output = yongjiefuncs.user_profile_to_list(profiles.values())
     return pretty_print_yj(all_profile_output)
