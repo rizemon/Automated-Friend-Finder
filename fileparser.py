@@ -35,6 +35,7 @@ def parse(doc):
     books = [i.strip()
              for i in lines[10:] if i != ""]
     profile = {
+        "name": name,
         "gender": gender[0],
         "country": country,
         "acceptable_country": acceptable_country,

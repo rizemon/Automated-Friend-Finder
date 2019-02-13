@@ -2,3 +2,4 @@
 path.txt
 *.pyc
 output
+.DS_Store

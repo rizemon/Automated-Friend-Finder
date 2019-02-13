@@ -1,16 +1,16 @@
-Name: Michael Jackson 
+Name: Michael Jackson
 Gender: Male
 Country: Singapore
 Acceptable_country: Singapore, China
 Age: 29
 Acceptable_age_range: 18-29
 Likes: hotpot, chicken and chops, chilli, roses, movies
-Dislikes: durain, garlic, swimming 
+Dislikes: durain, garlic, swimming
 
 Books:
-Mere Christianity 
+Mere Christianity
 Knowing God
-The problem of Pain 
-The God who is there 
-The reason for God: belief in an age of skepticism 
+The problem of Pain
+The God who is there
+The reason for God: belief in an age of skepticism
 Experiencing God: knowing and doing the will of God, work book
