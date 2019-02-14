@@ -92,17 +92,23 @@ def getMatches(profile_name, field):
     return result
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return send_from_directory('static', "index.html")
 
 
-@app.route('/<path:filename>')
+@app.route('/<path:filename>', methods=['GET'])
 def static_files(filename):
     return send_from_directory('static', filename)
 
 
-@app.route('/all')
+@app.route('/single', methods=['GET'])
+def viewProfile():
+    profile_name = request.args.get("profile_name")
+    return jsonify(profiles[profile_name])
+
+
+@app.route('/all', methods=['GET'])
 def viewAll():
 
     # Return a JSON of an array of all profiles
@@ -112,7 +118,8 @@ def viewAll():
     # Output as JSON
     return jsonify(resp)
 
-@app.route('/bestmatch/<string:field>')
+
+@app.route('/bestmatch/<string:field>', methods=['GET'])
 def viewBestMatch(field):
 
     # Return a JSON of an array of best matches based on field and profile's name
@@ -126,7 +133,7 @@ def viewBestMatch(field):
     return jsonify(resp)
 
 
-@app.route('/piechart/<string:field>')
+@app.route('/piechart/<string:field>', methods=['GET'])
 def plotPiechart(field):
 
     # Return a PNG of the plotted pie chart based on field
@@ -176,6 +183,7 @@ if __name__ == "__main__":
     # Read the profiles and store in profiles dictionary
     profiles = getfilepath.getProfiles(directory)
 
+    #Pre-compute matches based on interests
     matches_books = jiale.getMatchesBooks(profiles)
 
     # Pre-compute all pie charts
