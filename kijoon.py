@@ -11,13 +11,15 @@ from gensim import corpora
 # This function parses in your current profile and each matching profile into matching_interest_compiler
 def view_first_date_suggestions(name, profiles):
     user_profile = profiles[name]
-
     name_list = []
+    # Gets the profile informations of the top 3 best matched overall profiles from ronghao's viewMatchesOverall
     top_3_profile_without_interest = viewMatchesOverall(profiles, name)
 
+    # Loops through the list without interest and puts them into name_list
     for index, value in enumerate(top_3_profile_without_interest):
         name_list.append(value["name"])
 
+    # This adds back the name value into the list containing the dictionary of the profiles as top_3_profile_without_interest obtained from ronghao's viewMatchesOverall does not contain the name key pair value
     top_3_profile = []
     for name in name_list:
         top_3_profile.append(profiles[name])
@@ -45,10 +47,11 @@ def matching_interest_compiler(current_profile, matching_profile):
     cleanedDocument = documentPreprocessing(combinedInterest)
 
     #  The function documentTermMatrix returns the latent topics of the compiled interest, arranging the words according to their appearance as a list
-    listOfMostSignificantTopic = documentTermMatrix(cleanedDocument)
+    listOfMostSignificantTopic = document_term_matrix(cleanedDocument)
 
+    # This is the api key for eventBrite
     eventbrite = Eventbrite('2AFR6PPQRSQS62J2CLIK')
-    # eventCategoriesDict stores all the eventbrite id references in a dictionary
+    # eventCategoriesDict stores all the eventbrite id references into a dictionary
     eventCategoriesDict = {"Music": "103", "Business": "101", "Food": "110", "Community": "113", "Arts": "105", "Film": "104", "Sports": "108", "Health": "107", "Science": "102", "Outdoor": "109", "Charity": "111", "Spirituality": "114", "Family": "115", "Holiday": "116", "Politics": "112", "Fashion": "106", "Lifestyle": "117", "Auto": "118", "Hobbies": "119", "Other": "119", "School": "120"}
 
     # Stores all the keys of eventCategoriesDict in a list
@@ -77,7 +80,7 @@ def matching_interest_compiler(current_profile, matching_profile):
             # for lemma in synset.lemmas():
             value.append(synset)
 
-    # synSetDict stores the synsets of the events categories from eventbrite
+    # synSetDict2 stores the synsets of the events categories from eventbrite
     synSetDict2 = {i: [] for i in eventCategoriesList}
 
     for key, value in synSetDict2.items():
@@ -86,13 +89,13 @@ def matching_interest_compiler(current_profile, matching_profile):
             value.append(synset)
 
     # Now we have to compare the similarity of all the synsets of both dictionaries
-
     similarity_percent_dict ={}
     # This loops through all the values in syn_set_dict
     for key1, value1 in synSetDict.items():
         for index1 in value1:
             for key2, value2 in synSetDict2.items():
                 for index2 in value2:
+                    # The similarity percentage will be stored in a dictionary with the key being the 2 matching words
                     similarity_percent = wn.wup_similarity(index1, index2)
                     similarity_percent_dict[key1+key2] = similarity_percent
 
@@ -134,7 +137,7 @@ def documentPreprocessing(corpus):
     stop = set(stopwords.words('english'))
 
     # Places known punctuations into a set
-    exclude = set(string.punctuation)
+    punc = set(string.punctuation)
     # Performs lemmatization on the word to convert it to its base form
     # This considers the context
     # It will return the original input if it fails
@@ -142,34 +145,35 @@ def documentPreprocessing(corpus):
 
     # Cleans each list item in the the given text(corpus)
     def document_cleaning(doc):
-        stop_free = " ".join([i for i in doc.lower().split() if i not in stop])
-        punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
-        normalized = " ".join(lemma.lemmatize(word) for word in punc_free.split())
-        return normalized
+        stopwords_removed = " ".join([index for index in doc.lower().split() if index not in stop])
+        punctuation_removed = ''.join(index for index in stopwords_removed if index not in punc)
+        documents_normalized = " ".join(lemma.lemmatize(word) for word in punctuation_removed.split())
+        return documents_normalized
 
+    # Run the cleaning function for each list item then stores them into cleanedDocument
     cleanedDocument = [document_cleaning(doc).split() for doc in corpus]
     return cleanedDocument
 
 
-#This functions is La
-def documentTermMatrix(cleanedDocument):
+#This functions performs the latent dirichlet allocations algorithm to get the latent topics in the interest of both profiles and group them accordingly
+def document_term_matrix(cleanedDocument):
 
     # Assigns a unique token to each unique term
     # Dictionary(5 unique tokens: [u'chop', u'chicken', u'garlic', u'durain', u'swimming'])
-    dictionary = corpora.Dictionary(cleanedDocument)
+    dictionary_unique = corpora.Dictionary(cleanedDocument)
 
     # Converts the text-based corpus into a matrix representation
     # dictionary.doc2bow converts the document into a list of token_id(I.E Unique tokens) and token_count tuples
-    matrixRepresentation = [dictionary.doc2bow(doc) for doc in cleanedDocument]
+    matrix_representation = [dictionary_unique.doc2bow(doc) for doc in cleanedDocument]
 
-    ldaObject = gensim.models.ldamodel.LdaModel
+    lda_object = gensim.models.ldamodel.LdaModel
 
     # To determine optimal amount of topics for a dataset like ours, i chose 5
     # http://www.rpubs.com/MNidhi/NumberoftopicsLDA
-    ldamodel = ldaObject(matrixRepresentation, num_topics=5, id2word=dictionary, passes=200)
+    lda_model = lda_object(matrix_representation, num_topics=5, id2word=dictionary_unique, passes=200)
 
     # Returns all the most significant topics, arranging the topics and words by significance
-    return ldamodel.print_topics(num_topics=5, num_words=1)
+    return lda_model.print_topics(num_topics=5, num_words=1)
 
 
 
