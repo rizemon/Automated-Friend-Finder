@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" >
+    <span class="align-left">Automated Friend Finder</span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-right" *ngIf="profileService.current_profile" (click)="profileService.setCurrentProfile('')">Logout</span>
+</mat-toolbar>
+<div class="center">
+  <app-login *ngIf="!profileService.current_profile"></app-login>
+  <app-dashboard *ngIf="profileService.current_profile"></app-dashboard>
+</div>

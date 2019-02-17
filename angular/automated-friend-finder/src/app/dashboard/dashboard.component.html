@@ -1,0 +1,87 @@
+<mat-drawer-container class="fix-container">
+    <mat-drawer mode="side" opened > 
+        <mat-list>
+            <mat-list-item (click)="profileService.getSingle(profileService.current_profile)">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <h1 mat-line>{{profileService.current_profile}}</h1>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-divider></mat-divider>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <button mat-button (click)="profileService.getAll()">Show all</button>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <button mat-button [matMenuTriggerFor]="filter">Filter by</button>
+                <mat-menu #filter="matMenu">
+                    <button mat-menu-item (click)="profileService.getCountry()">Country</button>
+                </mat-menu>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <button mat-button [matMenuTriggerFor]="match">Best matches</button>
+                <mat-menu #match="matMenu">
+                    <button mat-menu-item (click)="profileService.getLikes()">Likes</button>
+                    <button mat-menu-item (click)="profileService.getDislikes()">Dislikes</button>
+                    <button mat-menu-item (click)="profileService.getBookInterests()">Interests</button>
+                    <button mat-menu-item (click)="profileService.getOverallInfo()">Overall Information</button>
+                    <button mat-menu-item (click)="profileService.getCSV()">Save as .csv</button>
+                    <button mat-menu-item (click)="profileService.getDateSuggestions()">Date Suggestions</button>
+                </mat-menu>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <button mat-button [matMenuTriggerFor]="stats">Website Statistics</button>
+                <mat-menu #stats="matMenu">
+                    <button mat-menu-item (click)="profileService.getLikesChart()">Likes</button>
+                    <button mat-menu-item (click)="profileService.getDislikesChart()">Dislikes</button>
+                    <button mat-menu-item (click)="profileService.getCountryChart()">Country</button>
+                    <button mat-menu-item (click)="profileService.getAgeChart()">Age</button>
+                </mat-menu>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-list>
+            <h1 mat-subheader>{{profileService.title}}</h1>
+            <mat-list-item *ngFor="let profile of profileService.profiles" (click)="profileService.getSingle(profile.name)">
+                <mat-icon mat-list-icon>favorite</mat-icon>
+                <h4 mat-line>{{profile.name}}</h4>
+                <p mat-line>{{profile.gender}}, {{profile.age}}, {{profile.country}}</p>
+                <p *ngIf="profile.eventCategory" mat-line>Event Category: <b>{{profile.eventCategory}}</b></p>
+                <p *ngIf="profile.eventCategory" mat-line>Event Suggestions:</p>
+                <p *ngFor=" let event of profile.listOfEvents" mat-line><a href="{{event.url}}" target="_blank">{{event.name}}</a></p>
+            </mat-list-item>
+            <img *ngIf="profileService.chart" src="{{profileService.chart}}"/>
+        </mat-list>
+        <mat-card *ngIf="profileService.profile">
+            <mat-card-content>
+                <p>Name: {{profileService.profile.name}}</p>
+                <p>Age: {{profileService.profile.age}}</p>
+                <p>Gender: {{profileService.profile.gender}}</p>
+                <p>Country: {{profileService.profile.country}}</p>
+                <p>Likes:</p>
+                <ul>
+                    <li *ngFor="let like of profileService.profile.likes">{{like}}</li>
+                </ul>
+                <p>Dislikes:</p>
+                <ul>
+                    <li *ngFor="let dislike of profileService.profile.dislikes">{{dislike}}</li>
+                </ul>
+                <p>Favourite Books:</p>
+                <ul>
+                    <li *ngFor="let book of profileService.profile.books">{{book}}</li>
+                </ul>
+                <mat-divider></mat-divider>
+                <h3 style="margin-top:2em">Partner requirements</h3>
+                <p>Age range: {{profileService.profile.acceptable_age_range.start}} - {{profileService.profile.acceptable_age_range.end}}</p>
+                <p>Country: </p>
+                    <ul>
+                        <li *ngFor="let country of profileService.profile.acceptable_country">{{country}}</li>
+                    </ul>
+            </mat-card-content>
+        </mat-card>
+    </mat-drawer-content>
+</mat-drawer-container>
