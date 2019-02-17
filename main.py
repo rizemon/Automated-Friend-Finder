@@ -24,11 +24,24 @@ CORS(app)
 
 # profiles dictionary to be accessed by all functions
 profiles = {}
+# dictionary mapping field name to respective pie chart
 piecharts = {}
+# dictionary mapping every possible pair of profiles to a similarity score
 matches_books = {}
 
 
 def getMatches(profile_name, field):
+
+    # Returns the profiles that are matched according to
+    # "country", "likes", "dislikes", "books", "overall", "suggestion"
+    #
+    # Parameters:
+    # profile_name (string): name of current user
+    # field (string): Either "country", "likes", "dislikes", "books", "overall", "suggestion"
+    #
+    # Returns:
+    # (list): list of profiles matched based on field
+
     result = []
     if field == "country":
         # Retrieve best matches by country
@@ -53,16 +66,41 @@ def getMatches(profile_name, field):
 
 @app.route('/', methods=['GET'])
 def index():
+
+    # Returns the index.html of the front-end application
+    #
+    # Parameters:
+    #
+    # Returns:
+    # (Response): contents of index.html
+
     return send_from_directory('static', "index.html")
 
 
 @app.route('/<path:filename>', methods=['GET'])
 def static_files(filename):
+
+    # Returns the static files (HTML, CSS ,JS) of the front-end application
+    #
+    # Parameters:
+    # filename (string): file name of the static files
+    #
+    # Returns:
+    # (Response): contents of static file
+
     return send_from_directory('static', filename)
 
 
 @app.route('/single', methods=['GET'])
 def viewProfile():
+
+    # Returns a JSON of the profile information of a given profile_name
+    #
+    # Parameters:
+    #
+    # Returns:
+    # (Response): JSON of profile information
+
     profile_name = request.args.get("profile_name")
     return jsonify(profiles[profile_name])
 
@@ -70,7 +108,12 @@ def viewProfile():
 @app.route('/all', methods=['GET'])
 def viewAll():
 
-    # Return a JSON of an array of all profiles
+    # Return a JSON of a list of all profiles
+    #
+    # Parameters:
+    #
+    # Returns:
+    # (Response): JSON of list of profiles' information
 
     resp = yongjie.view_profiles(profiles)
 
@@ -81,9 +124,16 @@ def viewAll():
 @app.route('/bestmatch/<string:field>', methods=['GET'])
 def viewBestMatch(field):
 
-    # Return a JSON of an array of best matches based on field and profile's name
+    # Return a JSON of a list of best matches based on field of a given profile
+    #
+    # Parameters:
+    # field (string): Either "country", "likes", "dislikes", "books", "overall", "suggestion"
+    #
+    # Returns:
+    # (Response): JSON of list of best matched profiles' information
 
-    # Retrieve name from GET parameters
+
+    # Retrieve profile's name from GET parameters
     profile_name = request.args.get("current_profile")
 
     resp = getMatches(profile_name, field)
@@ -96,6 +146,12 @@ def viewBestMatch(field):
 def plotPiechart(field):
 
     # Return a PNG of the plotted pie chart based on field
+    #
+    # Parameters:
+    # field (string): Either "country", "likes", "dislikes", "age"
+    #
+    # Returns:
+    # (Response): PNG of pie chart plotted based on field
 
     # If unsupported field, return 204
     if field not in piecharts:
@@ -108,6 +164,14 @@ def plotPiechart(field):
 
 @app.route('/csv', methods=['POST'])
 def saveCSV():
+
+    # Return a JSON of directory of the CSV saved
+    #
+    # Parameters:
+    #
+    # Returns:
+    # (Response): JSON containing directory of CSV
+
     # Path where the .csv files will be stored
     directory = abspath(r".//output//")
     # Retrieve JSON body
@@ -125,14 +189,17 @@ def saveCSV():
     return jsonify({"message": directory})
 
 
-
 if __name__ == "__main__":
-    # Get directory of profiles
+    # Initialize profiles directory
     directory = ""
+
     while True:
+        # Prompt for profiles directory
         directory = getfilepath.getFilePath()
+        # Check if directory does not exist
         if not isdir(directory):
             print "Folder does not exist."
+            # Delete path.txt if exist
             remove("path.txt")
         else:
             break
