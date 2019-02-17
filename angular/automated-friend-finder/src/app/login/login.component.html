@@ -1,0 +1,8 @@
+<mat-list>
+    <h1 mat-subheader>{{profileService.title}}</h1>
+    <mat-list-item *ngFor="let profile of profileService.profiles" (click)="profileService.setCurrentProfile(profile.name)">
+        <mat-icon mat-list-icon>favorite</mat-icon>
+        <h4 mat-line >{{profile.name}}</h4>
+        <p mat-line> {{profile.gender}}, {{profile.age}}, {{profile.country}} </p>
+    </mat-list-item>
+</mat-list>
