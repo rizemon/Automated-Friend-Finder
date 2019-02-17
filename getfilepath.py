@@ -31,8 +31,8 @@ def getFilePath():
     except IOError:
         f = open("path.txt", 'w')
         print "Path to profiles not set yet."
-        pathDirec = raw_input('File directory has not been set up yet,'\
-            'please choose the folder with profile data:')
+        pathDirec = raw_input('File directory has not been set up yet,,'\
+            'please enter the folder name with profiles data:')
         print "File path set to: %s" % pathDirec
         f.write(pathDirec)
         f.close()

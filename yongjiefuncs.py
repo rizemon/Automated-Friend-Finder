@@ -10,21 +10,6 @@ def format_list(to_format_list):
     return [format_str(x) for x in to_format_list]
 
 
-def clear_shell():
-    # print 20 empty lines for main menu
-    print "\n" * 20
-
-
-def person_title(gender):
-    # get title by gender
-    return 'Mr' if format_str(gender) == 'M' else 'Ms'
-
-
-def full_gender(gender):
-    # get full gender of profiles
-    return 'Male' if gender == 'M' else 'Female'
-
-
 def similarities(user_likes, target):
     # this function calculates likes or dislikes score
     # common_user_likes = all those likes which are in target too
@@ -32,6 +17,8 @@ def similarities(user_likes, target):
 
     # eg. common_user_likes = ["onion","chicken", "banana"]
     # target = ["chicken and soup", "burger", "banana"]
+    # common_user_likes = ["onion","chicken", "banana"]
+    # filtered_target = ["chicken and soup", "banana"]
     common_user_likes = [like for like in user_likes if like in target]
     # common_user_likes = ["chicken", "banana"]
     filtered_target = [t for t in target if t in common_user_likes]
@@ -71,102 +58,11 @@ def top_profiles(profiles, key, top=3):
     # return non 0 top profiles
     return [p for p in ordered[:top] if p[key]]
 
-#store to dict i set to none because we dont want to save logs in case of function 1
-def eval(profiles):
-    # this function lets user to see profiles of users by states function
-    # e.g profile by matched country
-    # 1- Mr A
-    # 2- Mr B
-    # when user enters 2 it will show compete profile of Mr B
-    index = -1
-    while index != 0:
-        index = integer_input("Enter profile index to view profile , Enter 0 to quit")
-        if index == 0:
-            return
-        if index > len(profiles):
-            print("Index out of bound. Please enter again !")
-        else:
-            #print_profile(profiles[index - 1])
-            user_profile = profiles[index - 1]
-
-
-            # this function prints profile on console, remove this if not required
-            print_profile(user_profile)
-            # #
-            # if storetodict is not None:
-            #     storetodict.append({
-            #         'name': user_profile['name'],
-            #         'gender': user_profile['gender'],
-            #         'age': user_profile['age'],
-            #         'country': user_profile['country']
-            #     })
-
-
-
-
-
 
 def list_to_str(to_convert):
     # this function converts a list to string separated by ,
     return ", ".join(to_convert)
 
-
-def integer_input(message):
-    # this function helps in taking integer input from user
-    # this function will keep taking input util user does not input a valid integer
-    while True:
-        num = raw_input(message)
-        try:
-            return int(num)
-        except ValueError:
-            print("Input is not a valid integer! please try again")
-
-
-def print_profile(row):
-    # print complete profile of a user
-
-    title = person_title(row['gender'])
-    gender = full_gender(row['gender'])
-    likes = list_to_str(row['likes'])
-    dislikes = list_to_str(row['dislikes'])
-    books = ",\n".join(row['books'])
-
-    print
-    print('{} {} \n'
-          'Age: {}\n'
-          'Country: {}\n'
-          'Gender: {}\n'
-          'Likes: {}\n'
-          'Dislikes: {}\n'
-          '\nBooks: \n{}'.format(title,
-                                 row['name'], row['age'],
-                                 row['country'], gender,
-                                 likes, dislikes, books
-                                 ))
-
-
-def print_profile_lists(profiles, reason):
-    # this function print top 3 profiles for function 3 and 4
-    index = 1
-    for profile in profiles:
-        title = person_title(profile['gender'])
-
-        reason_value = profile[reason]
-        if type(profile[reason]) == list:
-            reason_value = ", ".join(profile[reason])
-
-        print('{}. {} {}, Age {}, {}: {}'.format(
-            index, title, profile['name'], profile['age'], reason, reason_value))
-
-        # if storetodict is not None:
-        #     storetodict.append({
-        #         'name': profile['name'],
-        #         'gender': profile['gender'],
-        #         'age': profile['age'],
-        #         'country': profile['country']
-        #     })
-        index += 1
-    #print storetodict
 
 def filter_same_gender(user_profile, profiles):
     # this function filter same gender from profiles
@@ -174,11 +70,18 @@ def filter_same_gender(user_profile, profiles):
     return {k: v for k, v in profiles.items() if user_gender != v['gender']}
 
 
-def filter_in_acceptable_age_range(profiles, user_profile):
-    # this function filters profiles not in acceptable range of logged user
+def filter_in_acceptable_country_range(profiles, user_profile):
+    # this function filters profiles not in acceptable range of login user
     acceptable_country = user_profile['acceptable_country']
     return [p for p in profiles.values() if p['country'] in acceptable_country]
 
+
+def filter_in_acceptable_age_range(profiles, user_profile):
+    # this function filters profiles not in acceptable range of logged user
+    acceptable_age = user_profile['acceptable_age_range']
+    lower_age_limit = acceptable_age['start']
+    upper_age_limit = acceptable_age['end']
+    return [p for p in profiles if lower_age_limit <= p['age'] <= upper_age_limit]
 
 # return users profile in list format for func 2,3,4
 def user_profile_to_list(users):
@@ -193,12 +96,15 @@ def user_profile_to_list(users):
 
     return list_of_users
 
+    #Search for the profile with the given user name for example "Michael Jackson"
+    #If found return the profiles values else return error msg
 def get_profile_by_name(username, profiles):
     user_profile = profiles.get(username, None)
     if not user_profile:
         raw_input("Error! No user found with username {}".format(username))
         return
     return user_profile
+
 
 def pretty_print_yj(dictionary):
     # Pretty prints a dictionary
